@@ -112,10 +112,10 @@ df=pd.DataFrame(columns=[ 'statID' , 'statName','metElType' , 'metUnits' , 'year
 df = pd.DataFrame(readinglist)    
 readingListColumnsTitles = [ "statID", "statName" "metElType" , "metUnits",   "timeInterval",  "readingCt","year",  "month",  "obsDayOfMonth", "obsHour",  "obsValue",  "obsQC1",  "obsQC2", "AECode", "afterSlash","fullRow"]
 df = df.reindex(columns=readingListColumnsTitles)
-df.to_csv("ParsedDataWide.csv", sep=',')
+df.to_csv("ParsedDataWide-FDPW.csv", sep=',')
 
 df_rows=pd.DataFrame(columns=[ 'statID' , 'statName','metElType' , 'metUnits' , 'year' , 'month' , 'timeInterval' , 'filler99readingCt' , 'FullRow'])
 df_rows = pd.DataFrame(rowList)    
 rowListColumnsTitles = [ "statID", "statName" ,"metElType" , "metUnits",   "timeInterval",  "readingCt","year",  "month",  "fullRow"]
 df_rows = df_rows.reindex(columns=rowListColumnsTitles)
-df_rows.to_csv("TargetRowsWide.csv", sep=',')
+df_rows.to_csv("TargetRowsWide-FDPW.csv", sep=',')

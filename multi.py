@@ -38,7 +38,7 @@ startYear  = 1861
 startMonth = 12
 endYear = 1862
 endMonth = 2
-outFileName = str(startMonth)+str(startYear)+"--"+str(endMonth)+str(endYear)+".csv"
+outFileName = str(startMonth)+str(startYear)+"--"+str(endMonth)+str(endYear)+"-multi.csv"
 
 readinglist=[]
 rowList = []
@@ -192,7 +192,7 @@ readingListColumnsTitles = [  "stationName" , "readingType" , "metUnits","year",
 df = df.reindex(columns=readingListColumnsTitles)
 
 
-df.to_csv(outFileName, sep=',')
+df.to_csv("output"+outFileName, sep=',')
 
 df.set_index('dt', inplace = True)
 plt.figure()
