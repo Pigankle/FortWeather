@@ -2,3 +2,5 @@
 !/.gitignore
 *.csv
 .DS_Store
+.spyproject/*
+.spyproject
