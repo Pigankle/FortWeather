@@ -40,12 +40,12 @@ obsQC2=""
 
 readinglist=[]
 rowList = []
-for file in os.listdir():
+for file in os.listdir('Data/'):
     if file.endswith(".dat"):
         
 
     #with open('AllDatFiles.dat') as f:
-        with open(file) as f:
+        with open('Data/'+file) as f:
            for thisRow in f:
                #print line      
         #for thisRow in sampleText:

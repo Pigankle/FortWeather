@@ -27,14 +27,15 @@ obsQC1 =""
 obsQC2="" 
 storeReading = True
 
-tableC_Clouds=  {'0C':'Cirrus','0K':'Cumulus','ST':'Stratus','CC':'Cirro-cumulus','CS':'Cirro-stratus','KS':'Cumulo-stratus','KN':'Cumulo-nimbus','0N':'Nimbus','NS':'Nimbo-stratus','3':'clouds','1':'clear','HZ':'haze','HF':'highfog','SM':'smoky','SD':'scudd','99':'Missing','0R':'Rain','0T':'thunderstorm','0S':'Snow','0D':'drizzle/mist','0E':'Sleet','0G':'Glaze','0H':'Hail','0I':'Ice','0M':'mixed - rain and snow','0W':'squalls/showers/sprinkles','0F':'Fog','0X':'Dew','0Z':'Frost',}
+cloud_LookupDict=  {'00':'Missing','0C':'Cirrus','0K':'Cumulus','ST':'Stratus','CC':'Cirro-cumulus','CS':'Cirro-stratus','KS':'Cumulo-stratus','KN':'Cumulo-nimbus','0N':'Nimbus','NS':'Nimbo-stratus','3':'clouds','1':'clear','HZ':'haze','HF':'highfog','SM':'smoky','SD':'scudd','99':'Missing','0R':'Rain','0T':'thunderstorm','0S':'Snow','0D':'drizzle/mist','0E':'Sleet','0G':'Glaze','0H':'Hail','0I':'Ice','0M':'mixed - rain and snow','0W':'squalls/showers/sprinkles','0F':'Fog','0X':'Dew','0Z':'Frost',}
+
+tableC_Clouds=  cloud_LookupDict#{'0C':'Cirrus','0K':'Cumulus','ST':'Stratus','CC':'Cirro-cumulus','CS':'Cirro-stratus','KS':'Cumulo-stratus','KN':'Cumulo-nimbus','0N':'Nimbus','NS':'Nimbo-stratus','3':'clouds','1':'clear','HZ':'haze','HF':'highfog','SM':'smoky','SD':'scudd','99':'Missing','0R':'Rain','0T':'thunderstorm','0S':'Snow','0D':'drizzle/mist','0E':'Sleet','0G':'Glaze','0H':'Hail','0I':'Ice','0M':'mixed - rain and snow','0W':'squalls/showers/sprinkles','0F':'Fog','0X':'Dew','0Z':'Frost',}
 tableE_precipType =  {'R':'Rain','T':'thunderstorm','S':'Snow','D':'drizzle/mist','E':'Sleet','G':'Glaze','H':'Hail','I':'Ice','M':'mixed - rain and snow','W':'squalls/showers/sprinkles','F':'Fog','X':'Dew','Z':'Frost','9':'Missing'}
 tableD_WeatherType=  {'01':'Clear','02':'Partly Cloudy','03':'Clouds','04':'Rain','05':'Snow','06':'Smoke/haze','07':'Fog','08':'Drizzle(mist)','09':'Sleet','10':'Glaze','11':'Thunder','12':'Hail','13':'Duststorm','14':'Blowing snow','15':'Highwind','16':'Tornado','17':'Fair','18':'Squalls','19':'Frost','20':'Mixed rain andsnow','21':'Dew','99':'Illegible',}
 statDict = {"04763099" :"Sacramento","04774099":"SanDiego","45297699":"FortSteilacoom" , "45877399": "FortVancouver","45297799":"FortWallaWalla"}
+monthLengths=  {1:31,2:28,3:31,4:30,5:31,6:30,7:31,8:31,9:30,10:31,11:30,12:31,}
 
-
-
-startYear  = 1861
+startYear  = 1861 #Start of the range of years to be processed.  Enter 0 for all years
 startMonth = 12
 endYear = 1862
 endMonth = 2
@@ -42,12 +43,12 @@ outFileName = str(startMonth)+str(startYear)+"--"+str(endMonth)+str(endYear)+"-m
 
 readinglist=[]
 rowList = []
-for file in os.listdir():
+for file in os.listdir('Data'):
     if file.endswith(".dat"):
         
 
     #with open('AllDatFiles.dat') as f:
-        with open(file) as f:
+        with open('Data/'+file) as f:
             stationName = file[:-9]
             for thisRow in f:
                 statID = thisRow[3:11]        #print line      
@@ -68,7 +69,7 @@ for file in os.listdir():
     
                     readingCt = int(thisRow[27:30])
                     
-                    if ((int(year)==startYear and int(month)>= startMonth) or ( int(year)==endYear and int(month)<=endMonth )) :# and int(year) > 1860 :
+                    if True:#((int(year)==startYear and int(month)>= startMonth) and ( int(year)==endYear and int(month)<=endMonth )) :# and int(year) > 1860 :
                       
                         dict2 = {"recType":recType, "statID": statID, "stationName" : stationName ,"readingType": readingType , "metUnits": metUnits, "year": year,  "month": month,  "timeInterval": timeInterval,  "readingCt": readingCt,  "fullRow":thisRow}
                         rowList.append(dict2)
@@ -152,8 +153,8 @@ for file in os.listdir():
                                 summaryTag = "_avg"    
                             if int(obsHour) < 25:
                                 morNoNi = "_"+obsHour
-                            if float(obsDayOfMonth) <=31:
-                                if float(obsHour) <99 :
+                            if float(obsDayOfMonth) <=monthLengths[int(month)]:
+                                if float(obsHour) <89 :  ##TODO ADJUST HERE TO CAPTURE SUNRISE/SUNSET STYLE HOURS
                                     dt = datetime.fromisoformat(year +"-"+ month +"-"+ obsDayOfMonth +" "+ obsHour +":00:00" )
                                 else:
                                     dt = datetime.fromisoformat(year +"-"+ month +"-"+ obsDayOfMonth)
@@ -174,9 +175,9 @@ for file in os.listdir():
                                 textObs = obsValue
                             if obsQC1 == "M":
                                 textObs = "Missing"
-                                numObs =""
-                                obsValue = "-"
-                            dict1 = { "stationName" : stationName ,"readingType": readingType , "metUnits": outUnits, "year": float(year)+1000,  "month": month,    "obsDayOfMonth": obsDayOfMonth, "obsHour": obsHour,  "obsValue": obsValue,"numObs": numObs,  "obsQC1": obsQC1,  "obsQC2": obsQC2, "dt":dt, "YY-MM": year+"-"+month, "YY-MM-DD": year+"-"+month+"-"+obsDayOfMonth, "textObs":textObs, "thisRow":thisRow}
+                                numObs =float("nan")
+                                obsValue =float("nan")
+                            dict1 = { "stationName" : stationName ,"readingType": readingType , "metUnits": outUnits, "year-excel": float(year)+1000,  "month": month,    "obsDayOfMonth": obsDayOfMonth, "obsHour": obsHour,  "obsValue": obsValue,"numObs": numObs,  "obsQC1": obsQC1,  "obsQC2": obsQC2, "dt":dt, "YY-MM": year+"-"+month, "YY-MM-DD": year+"-"+month+"-"+obsDayOfMonth, "textObs":textObs, "thisRow":thisRow}
                             
         
                             readinglist.append(dict1)
@@ -185,23 +186,27 @@ for file in os.listdir():
                         if 'str' in thisRow:
                           break
 
-df=pd.DataFrame(columns=['stationName','readingType' ,'metUnits' , 'year' , 'month'   , 'obsDayOfMonth' , 'obsHour'  , 'obsValue' , 'numObs', 'obsQC1' , 'obsQC2',"dt", "YY-MM", "YY-MM-DD", "textObs"  ])#     , "thisRow"])
+df=pd.DataFrame(columns=['stationName','readingType' ,'metUnits' , 'year-excel' , 'month'   , 'obsDayOfMonth' , 'obsHour'  , 'obsValue' , 'numObs', 'obsQC1' , 'obsQC2',"dt", "YY-MM", "YY-MM-DD", "textObs"  ])#     , "thisRow"])
 
 df = pd.DataFrame(readinglist)    
-readingListColumnsTitles = [  "stationName" , "readingType" , "metUnits","year",  "month",  "obsDayOfMonth", "obsHour",  "obsValue", "numObs", "obsQC1",  "obsQC2","dt", "YY-MM", "YY-MM-DD", "textObs"   ]#    , "thisRow"]
+readingListColumnsTitles = [  "stationName" , "readingType" , "metUnits","year-excel",  "month",  "obsDayOfMonth", "obsHour",  "obsValue", "numObs", "obsQC1",  "obsQC2","dt", "YY-MM", "YY-MM-DD", "textObs"   ]#    , "thisRow"]
 df = df.reindex(columns=readingListColumnsTitles)
 
 
-df.to_csv("output"+outFileName, sep=',')
+df.to_csv("output/"+outFileName, sep=',')
 
+#print(df.iloc[10])
+
+
+
+#%%
 df.set_index('dt', inplace = True)
 plt.figure()
-
-plotPRCP = df[df['readingType'].str.contains('PRCP')]
+plotPRCP = df[df['readingType'].str.match('PRCP')]
 plotPRCP = plotPRCP[plotPRCP['stationName'].str.contains('cisco')]
 plotPRCP = plotPRCP[pd.to_numeric(plotPRCP.obsDayOfMonth ) < 32]
 axPRCP = plotPRCP.plot.bar(  y = 'numObs')#,marker = "o")
-
+plt.title('Cisco')
 plt.figure()
 
 plotTAHR = df[df['readingType'].isin(['TAHR_07','TAHR_14','TAHR_21']) ].interpolate()
@@ -210,3 +215,5 @@ plotTAHR = plotTAHR[~plotTAHR['obsQC1'].str.contains("M")]
 plotTAHR.interpolate().plot(  y = 'numObs',linestyle = "-") 
 
 plotTAHR.interpolate().plot(  y = 'numObs',linestyle = "-", ax = axPRCP) 
+
+#%%

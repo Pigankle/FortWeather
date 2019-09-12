@@ -23,12 +23,13 @@ obsValue= ""
 obsQC1 =""
 obsQC2=""
 
+data_dir = 'Data/' #enter relative path to data directory, including "/" as necessary
 
 from datetime import datetime
 import numpy as np
 
 
-cloud_LookupDict=  {'0C':'Cirrus','0K':'Cumulus','ST':'Stratus','CC':'Cirro-cumulus','CS':'Cirro-stratus','KS':'Cumulo-stratus','KN':'Cumulo-nimbus','0N':'Nimbus','NS':'Nimbo-stratus','3':'clouds','1':'clear','HZ':'haze','HF':'highfog','SM':'smoky','SD':'scudd','99':'Missing','0R':'Rain','0T':'thunderstorm','0S':'Snow','0D':'drizzle/mist','0E':'Sleet','0G':'Glaze','0H':'Hail','0I':'Ice','0M':'mixed - rain and snow','0W':'squalls/showers/sprinkles','0F':'Fog','0X':'Dew','0Z':'Frost',}
+cloud_LookupDict=  {'00':'Missing','0C':'Cirrus','0K':'Cumulus','ST':'Stratus','CC':'Cirro-cumulus','CS':'Cirro-stratus','KS':'Cumulo-stratus','KN':'Cumulo-nimbus','0N':'Nimbus','NS':'Nimbo-stratus','3':'clouds','1':'clear','HZ':'haze','HF':'highfog','SM':'smoky','SD':'scudd','99':'Missing','0R':'Rain','0T':'thunderstorm','0S':'Snow','0D':'drizzle/mist','0E':'Sleet','0G':'Glaze','0H':'Hail','0I':'Ice','0M':'mixed - rain and snow','0W':'squalls/showers/sprinkles','0F':'Fog','0X':'Dew','0Z':'Frost',}
 PTYP_LookupDict =  {'R':'Rain','T':'thunderstorm','S':'Snow','D':'drizzle/mist','E':'Sleet','G':'Glaze','H':'Hail','I':'Ice','M':'mixed - rain and snow','W':'squalls/showers/sprinkles','F':'Fog','X':'Dew','Z':'Frost','9':'Missing'}
 DYSW_STWX_LookupDict=  {'01':'Clear','02':'Partly Cloudy','03':'Clouds','04':'Rain','05':'Snow','06':'Smoke/haze','07':'Fog','08':'Drizzle(mist)','09':'Sleet','10':'Glaze','11':'Thunder','12':'Hail','13':'Duststorm','14':'Blowing snow','15':'Highwind','16':'Tornado','17':'Fair','18':'Squalls','19':'Frost','20':'Mixed rain andsnow','21':'Dew','99':'Illegible',}
 units_LookupDict =  {'HF':'Hundredths of degrees Fahrenheit',' I':'Inches','TI':'Tenths of an inch','HI':'Hundredths of inches','IT':'Thousandths of inches of mercury','MH':'Miles per hour',' M':'Whole miles','NA':'No units','DG':'whole degrees','TN':'Scale of 0 to 10','WN':'Scale of 0 to 12','PC':'Whole percent','TP':'Tenths of a percent','TG':'Tenths of feet',}
@@ -37,12 +38,12 @@ statDict = {"04763099" :"Sacramento","04774099":"SanDiego","45297699":"FortSteil
 import os
 readinglist=[]
 rowList = []
-for file in os.listdir():
+for file in os.listdir(data_dir):
     if file.endswith(".dat"):
         
 
     #with open('AllDatFiles.dat') as f:
-        with open(file) as f:
+        with open(data_dir+file) as f:
            for thisRow in f:
                #print line      
         #for thisRow in sampleText:
@@ -64,7 +65,7 @@ for file in os.listdir():
                 AECode       = thisRow[30+(readingCt)*12 : 30+(readingCt)*12+8]
                 afterSlash = thisRow[30+(readingCt)*12+9 : 30+(readingCt)*12+16]
     
-                if (int(year)==1861 and int(month)<9) or (int(year)==1862 and int(month)<7) :# and int(year) > 1860 :
+                if True:#(int(year)==1861 and int(month)<9) or (int(year)==1862 and int(month)<7) :# and int(year) > 1860 :
                    
 #                    dict2 = { "statID": statID, "statName" : statName ,"metElType": metElType , "metUnits": metUnits, "year": year,  "month": month,  "timeInterval": timeInterval,  "readingCt": readingCt,  "fullRow":thisRow}
                     dict2 = { "statName" : statName ,"metElType": metElType , "metUnits": metUnits, "year": year,  "month": month,  }
@@ -110,7 +111,7 @@ for file in os.listdir():
 df=pd.DataFrame(columns=[ 'statID' , 'statName','metElType' , 'metUnits' , 'year' , 'month' , 'timeInterval' , 'filler99readingCt' , 'obsDayOfMonth' , 'obsHour' , 'obsSign' , 'obsValue' , 'obsQC1' , 'obsQC2','AECode', 'afterSlash','fullRow'])
 
 df = pd.DataFrame(readinglist)    
-readingListColumnsTitles = [ "statID", "statName" "metElType" , "metUnits",   "timeInterval",  "readingCt","year",  "month",  "obsDayOfMonth", "obsHour",  "obsValue",  "obsQC1",  "obsQC2", "AECode", "afterSlash","fullRow"]
+readingListColumnsTitles = [ "statID", "statName" ,"metElType" , "metUnits",   "timeInterval",  "readingCt","year",  "month",  "obsDayOfMonth", "obsHour",  "obsValue",  "obsQC1",  "obsQC2", "AECode", "afterSlash","fullRow"]
 df = df.reindex(columns=readingListColumnsTitles)
 df.to_csv("ParsedDataWide-FDPW.csv", sep=',')
 
