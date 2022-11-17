@@ -32,8 +32,8 @@ _Errors found in this document should be brought to the attention of the Data Ba
 ____________________________________________________
  ## [DESCRIPTION](#DESCRIPTION) 
 
-### [Access Method and Sort for Archived Data...................4](#Access Method and Sort for Archived Data) 
-### [Access Method and Sort for Supplied Data...................8](#Access Method and Sort for Supplied Data) 
+### [Access Method and Sort for Archived Data...................4](#Access-Method-and-Sort-for-Archived-Data) 
+### [Access Method and Sort for Supplied Data...................8](#Access-Method-and-Sort-for-Supplied-Data) 
 ### [Element Names and Definitions.............................10](#Element Names and Definitions) 
 ### [Start Date................................................17](#Start-Date) 
 ### [Stop Date.................................................17](#Stop-Date) 
@@ -210,7 +210,7 @@ IMPLICIT INTEGER (A-Z)
 
 + FLAG2(100) 
 
-` `10  READ (10,20,END=999,ERR=10) RECTYP, STNID, ELMTYP, EUNITS, IYEAR, 
+    10  READ (10,20,END=999,ERR=10) RECTYP, STNID, ELMTYP, EUNITS, IYEAR, 
 
 + IMON, IFIL, NUMVAL, (IDAY(J), IHOUR(J), IVALUE(J), 
 + FLAG1(J), FLAG2(J), J=1, NUMVAL) 
@@ -296,71 +296,46 @@ This description is for those systems that can't handle variable blocked records
 |608 |                                                    |12 | 1219-1230 | DATA PORTION
 
 #### 5. Format  (Variable Length Record Layout)**              
-1. The first eight elements (positions 001-030) constitute the ID PORTION 
+1. The first eight elements (positions 001-030) constitute the ID PORTION of the record and describe the characteristics of the entire record.  The next six elements, the DATA PORTION of the record contains information about each meteorological element value reported.  This portion is repeated for as many values as occur in the monthly record. 
 
-of the record and describe the characteristics of the entire record.  The next six elements, the DATA PORTION of the record contains information about each meteorological element value reported.  This portion is repeated for as many values as occur in the monthly record. 
-
-2. Each logical record is of variable length with a maximum of 1230 
-
-characters.  Each logical record contains a station's data for a specific meteorological element over a one-month interval.  The form of a record is: 
-
-**ID PORTION (30 Characters) Fixed length**
-
-|      | REC TYP |   STATION ID  |  ELEM TYPE | UNT |  YEAR    | MO   | DUR    | FILL     | NUM  VAL |
-|------|---------|---------------|------------| ----|----------|------|--------|----------|-----------|
-| | XXX     |  XXXXXXXX  |  XXXX  |  XX   |  XXXX  |  XX  |  XX   |   XX   |  XXX  | 
-| ELEMENTS| 001     |    002  |     003  | 004  |  005 |  006 | 007 |   008 |  009| 
-
-**DATA PORTION (12 Characters, repeated "NUM-VAL" times--up to 100**
+2. Each logical record is of variable length with a maximum of 1230  characters.  Each logical record contains a station's data for a specific meteorological element over a one-month interval.  The form of a record is: 
 
 
-|     | DY  | HR  |  MET. | ELEM        | FL 1          |  FL 2 |  DY  | HR  | MET. | ELEM |  FL 1 | FL 2        | 
-|-----|-----|------|-------|-------------|---------------|--------|-----|-----|------|------|--------|-------------|
-||     |     |   S  | DATA VALUE  |    |      |  |     | |  S   | DATA  VALUE |      |    >**  
-|     |  XX |  XX  |   X  |  XXXXX  |   X  |   X  |  XX  |   XX | X    |  XXXXX |   X  |   X | 
-| ELEMENTS | 010 | 011 |  012 |  013 |   014 | 015 | 016 | 017 | 018  |   019 |  020 | 021 
-
-
-|     | DY  | HR          |  MET.| ELEM          |  FL 1 |  FL 2|             
-|-----|-----|-------------|----|---------------|-------|-------|
-||     |     |             | S  | DATA VALUE ** |    |   | 
-| | XX  |  XX  |  X  |  XXXXX  |   X  |   X | 
-|ELEMENTS  | 604 | 605 | 606 |  607  |  608 | 609 |
-
-| FIELD            | CHAR                         | ELEMENT |
-|------------------|------------------------------|------|
-| ID PORTION       |||
-| REC TYP          | XXX                          | 1    |
-| STATION ID       | XXXXXXXX                     | 2    |
-| ELEM TYPE        | XXXX                         | 3    |
-| UNT              | XX                           | 4    |
-| YEAR             | XXXX                         | 5    |
-| MO               | XX                           | 6    |
-| DUR              | XX                           | 7    |
-| FILL             | XX                           |      |
-| NUM VAL          | XXX                          |      |
-|         | - - DATA POINT 1 - -         | |
- FIELD            | CHAR                         | ELEMENT |
-| DY               | XX                           | 10   |
-| HR               | XX                           | 11   |
-| Met Elem S       | X                            | 12   |
-| Met Elem Data Value | XXXXX                        | 13   |
-| FL 1             | X                            | 14   |
-| FL 2             | X                            | 15   |
-|         | - - DATA POINT 2 - -         ||
-| DY               | XX                           | 16   |
-| HR               | XX                           | 17   |
-| Met Elem S       | X                            | 18   |
-| Met Elem Data Value | XXXXX                        | 19   |
-| FL 1             | X                            | 20   |
-| FL 2             | X                            | 21   |
-|                  | - - UP TO 62 DATA POINTS - - |      |
-| DY               | XX                           | 604  |
-| HR               | XX                           | 605  |
-| Met Elem S       | X                            | 606  |
-| Met Elem Data Value | XXXXX                        | 607  |
-| FL 1             | X                            | 608  |
-| FL 2             | X                            | 609  |
+| FIELD               | CHAR                                                               | ELEMENT |
+|---------------------|--------------------------------------------------------------------|---------|
+|                     | - - ID PORTION (30 Characters) Fixed Length - -                    ||
+| REC TYP             | XXX                                                                | 1       |
+| STATION ID          | XXXXXXXX                                                           | 2       |
+| ELEM TYPE           | XXXX                                                               | 3       |
+| UNT                 | XX                                                                 | 4       |
+| YEAR                | XXXX                                                               | 5       |
+| MO                  | XX                                                                 | 6       |
+| DUR                 | XX                                                                 | 7       |
+| FILL                | XX                                                                 |         |
+| NUM VAL             | XXX                                                                |         |
+|                     | **DATA PORTION (12 Characters, repeated "NUM-VAL" times--up to 100 |         |
+|                     | - - DATA POINT 1 - -                                               | |
+ FIELD               | CHAR                                                               | ELEMENT |
+| DY                  | XX                                                                 | 10      |
+| HR                  | XX                                                                 | 11      |
+| Met Elem S          | X                                                                  | 12      |
+| Met Elem Data Value | XXXXX                                                              | 13      |
+| FL 1                | X                                                                  | 14      |
+| FL 2                | X                                                                  | 15      |
+|                     | - - DATA POINT 2 - -                                               ||
+| DY                  | XX                                                                 | 16      |
+| HR                  | XX                                                                 | 17      |
+| Met Elem S          | X                                                                  | 18      |
+| Met Elem Data Value | XXXXX                                                              | 19      |
+| FL 1                | X                                                                  | 20      |
+| FL 2                | X                                                                  | 21      |
+|                     | - - UP TO 62 DATA POINTS - -                                       |         |
+| DY                  | XX                                                                 | 604     |
+| HR                  | XX                                                                 | 605     |
+| Met Elem S          | X                                                                  | 606     |
+| Met Elem Data Value | XXXXX                                                              | 607     |
+| FL 1                | X                                                                  | 608     |
+| FL 2                | X                                                                  | 609     |
 
 
 3. The Number of Data Portions (position 009) for the logical record of type "DLY" ranges from 1 to 62. 
@@ -379,162 +354,124 @@ Provided within this section are information and examples of how to access the f
 
 This is a typical ANSI Standard COBOL Fixed Record Length Description 
 
-`      `FD   INDATA 
-
-            LABEL RECORDS ARE STANDARD (FOR STD LABEL TAPES) 
-
-            RECORDING MODE F 
-
-            BLOCK CONTAINS 15 RECORDS 
-
-            DATA IS DATA-RECORD 
-
-`      `01   DATA RECORD 
-
-            02  RECORD-TYPE         PIC X(3).  
-
-            02  STATION-ID          PIC X(8). 
-
-            02  ELEMENT-TYPE        PIC X(4). 
-
-            02  ELEMENT-UNITS       PIC XX. 
-
-            02  YEAR                PIC 9(4). 
-
-            02  MONTH               PIC 99. 
-
-            02  FILLER              PIC 9(4). 
-
-            02  NUMBER-VALUES       PIC 9(3). 
-
-            02  DAILY-ENTRY 
-
-`               `OCCURS 31 TIMES.  
-
-`               `04  DAY             PIC 99. 
-
-`               `04  HOUR            PIC 99. 
-
-`               `04  DATA-VALUE      PIC S9(5) SIGN LEADING SEPARATE.                04  D-VAL REDEFINES DATA-VALUE. 
-
-`                   `05  SIGN-VAL    PIC X. 
-
-`                   `05  DATA-IN     PIC X(5). 
-
-`               `04  FLAG-1          PIC X. 
-
-`               `04  FLAG-2          PIC X. 
+          FD   INDATA
+            LABEL RECORDS ARE STANDARD (FOR STD LABEL TAPES)
+            RECORDING MODE F
+            BLOCK CONTAINS 15 RECORDS
+            DATA IS DATA-RECORD
+          01   DATA RECORD
+            02  RECORD-TYPE         PIC X(3).
+            02  STATION-ID          PIC X(8).
+            02  ELEMENT-TYPE        PIC X(4).
+            02  ELEMENT-UNITS       PIC XX.
+            02  YEAR                PIC 9(4).
+            02  MONTH               PIC 99.
+            02  FILLER              PIC 9(4).
+            02  NUMBER-VALUES       PIC 9(3).
+            02  DAILY-ENTRY
+                 OCCURS 31 TIMES.
+                 04  DAY             PIC 99.
+                 04  HOUR            PIC 99.
+                 04  DATA-VALUE      PIC S9(5) SIGN LEADING SEPARATE.               
+                 04  D-VAL REDEFINES DATA-VALUE.
+                     05  SIGN-VAL    PIC X.
+                     05  DATA-IN     PIC X(5).
+                 04  FLAG-1          PIC X.
+                 04  FLAG-2          PIC X. 
 
 2. **FORTRAN Data Description**     FORTRAN 77 Example 
 
-`      `DEFINE FILE 10 (ANSI, FB, 402, 6030)       CHARACTER\*3 RECTYP 
-
-`      `CHARACTER\*8 STNID 
-
-`      `CHARACTER\*4 ELMTYP 
-
-`      `CHARACTER\*2 EUNITS 
-
-`      `CHARACTER\*1 FLAGI, FLAG2 
-
-`      `DIMENSION IDAY(31), IHOUR(31), 
-
-+ IVALUE(31), FLAG1(31), FLAG2(31) 
-
-` `10   READ (10,20,END=999,ERR=10)RECTYP, STNID, ELMTYP, EUNITS, IYEAR, 
-
-+ IMON, IFIL, NUMVAL, (IDAY(J), IHOUR(J), IVALUE(J), 
-+ FLAG1(J), FLAG2(J), J=1, 31) 
-
-` `20   FORMAT (A3, A8, A4, A2, I4,I2, I4, 13, 31(212, I6, 2A1)) 
+          DEFINE FILE 10 (ANSI, FB, 402, 6030)       CHARACTER\*3 RECTYP
+          CHARACTER\*8 STNID
+          CHARACTER\*4 ELMTYP
+          CHARACTER\*2 EUNITS
+          CHARACTER\*1 FLAGI, FLAG2
+          DIMENSION IDAY(31), IHOUR(31), IVALUE(31), FLAG1(31), FLAG2(31) 
+       10   READ (10,20,END=999,ERR=10)RECTYP, STNID, ELMTYP, EUNITS, IYEAR, 
+            + IMON, IFIL, NUMVAL, (IDAY(J), IHOUR(J), IVALUE(J), 
+            + FLAG1(J), FLAG2(J), J=1, 31)
+       20   FORMAT (A3, A8, A4, A2, I4,I2, I4, 13, 31(212, I6, 2A1)) 
 
 3. **List of Variables**                      
 
-        ELEMENT                                      WIDTH   POSITION    
-
-001   RECORD TYPE (= DLY)                        3     001-003**--**           002   STATION ID                                 8     004-011  **|**    
-
-003   METEOROLOGICAL ELEMENT TYPE                4     012-015  **|**  
-
-004   MET. ELEMENT MEASUREMENT UNITS CODE        2     016-017  **|--**ID 
-
-005   YEAR                                       4     018-021  **|**  PORTION 006   MONTH                                      2     O22-023  **|**     
-
-007   AMOUNT OF TIME BETWEEN MEASUREMENTS        2     024-025  **|** 
-
-008   FILLER (= 99)                              2     026-027  **|**    
-
-009   NO. OF DATA PORTIONS THAT FOLLOW (= 031)   3     028-030**--**     
-
-010   DAY OF MONTH                               2     031-032**--**     
-
-011   HOUR OF OBSERVATION                        2     033-034  **|** DATA 
-
-012   SIGN OF METEOROLOGICAL ELEMENT VALUE       1     035      **|--**PORTION       VALUE OF METEOROLOGICAL ELEMENT            5     036-040  **|**   
-
-`      `QUALITY CONTROL FLAG 1                     1     041      **|**  
-
-`      `QUALITY CONTROL FLAG 2                     1     042    **--**  
-
-`      `DATA GROUPS IN THE SAME FORM AS ELEMENT   12     043-054  DATA PORTION       POSITIONS 31-42 ARE REPEATED              12     055-066  DATA PORTION       31 TIMES.                               .....    ..... 
-
-194                                             12     391-402  DATA PORTION 
+ |       | ELEMENT                                     | WIDTH | POSITION |   
+|-------|---------------------------------------------|-------|----------|
+| 001   | RECORD TYPE (= DLY)                         | 3     | 001-003  |
+| 002   | STATION ID                                  | 8     | 004-011  |
+| 003   | METEOROLOGICAL ELEMENT TYPE                 | 4     | 012-015  |
+| 004   | MET. ELEMENT MEASUREMENT UNITS CODE         | 2     | 016-017  |
+| 005   | YEAR                                        | 4     | 018-021  |
+| 006   | MONTH                                       | 2     | O22-023  |
+| 007   | AMOUNT OF TIME BETWEEN MEASUREMENTS         | 2     | 024-025  |
+| 008   | FILLER (= 99)                               | 2     | 026-027  |
+| 009   | NO. OF DATA PORTIONS THAT FOLLOW (= 031)    | 3     | 028-030  |
+| ***** | BEGIN FIRST DATA POINT                      | ***** | *****    |
+| 010   | DAY OF MONTH                                | 2     | 031-032  |
+| 011   | HOUR OF OBSERVATION                         | 2     | 033-034  |
+| 012   | SIGN OF METEOROLOGICAL ELEMENT VALUE        | 1     | 035      |    
+|       | VALUE OF METEOROLOGICAL ELEMENT             | 5     | 036-040  |
+|       | QUALITY CONTROL FLAG 1                      | 1     | 041      |
+|       | QUALITY CONTROL FLAG 2                      | 1     | 042      |
+| ***** | *****                                       | ***** | *****    |
+|       | DATA GROUPS IN THE SAME FORM AS ELEMENT.... | 12    | 043-054  |
+| 	     | ....POSITIONS 31-42 ARE REPEATED ....  			  | 12    | 055-066  |   
+| 	     | .....31 TIMES.                              ||       |
+| ***** | *****                                       | ***** | *****    |
+| 194   |                                             | 12    | 391-402  |
 
 4. **Format (Fixed Length Record Layout)** 
-1. The first eight elements (positions 001-030) constitute the ID PORTION 
+5. The first eight elements (positions 001-030) constitute the ID PORTION of the record and describe the characteristics of the entire record.  The next six elements, the DATA PORTION of the record, contain information about each meteorological element value, reported. This portion is repeated 31 times.   
 
-of the record and describe the characteristics of the entire record.  The next six elements, the DATA PORTION of the record, contain information about each meteorological element value, reported. This portion is repeated 31 times.   
+6. Each logical record is fixed with 402 characters.  Each logical record contains a station's  data for a specific meteorological element over a one month interval.  
+ - The form of a record is: ID PORTION (30 characters) Fixed Length 
 
-2. Each logical record is fixed with 402 characters.  Each logical record 
+| FIELD               | CHAR                                             | ELEMENT |
+|---------------------|--------------------------------------------------|---------|
+|                     | - - ID PORTION (30 Characters) Fixed Length - -  ||
+| REC TYP             | XXX                                              | 1       |
+| STATION ID          | XXXXXXXX                                         | 2       |
+| ELEM TYPE           | XXXX                                             | 3       |
+| UNT                 | XX                                               | 4       |
+| YEAR                | XXXX                                             | 5       |
+| MO                  | XX                                               | 6       |
+| DUR                 | XX                                               | 7       |
+| FILL                | XX                                               |         |
+| NUM VAL             | XXX                                              |         |
+|                     | **DATA PORTION (12 Characters, repeated 31 times |         |
+|                     | - - DATA POINT 1 - -                             |         |
+ FIELD               | CHAR                                             | ELEMENT |
+| DY                  | XX                                               | 10      |
+| HR                  | XX                                               | 11      |
+| Met Elem S          | X                                                | 12      |
+| Met Elem Data Value | XXXXX                                            | 13      |
+| FL 1                | X                                                | 14      |
+| FL 2                | X                                                | 15      |
+|                     | - - DATA POINT 2 - -                             ||
+| DY                  | XX                                               | 16      |
+| HR                  | XX                                               | 17      |
+| Met Elem S          | X                                                | 18      |
+| Met Elem Data Value | XXXXX                                            | 19      |
+| FL 1                | X                                                | 20      |
+| FL 2                | X                                                | 21      |
+|                     | - - UP TO 31 DATA POINTS - -                     |         |
+| DY                  | XX                                               | 190     |
+| HR                  | XX                                               | 191     |
+| Met Elem S          | X                                                | 192     |
+| Met Elem Data Value | XXXXX                                            | 193     |
+| FL 1                | X                                                | 194     |
+| FL 2                | X                                                | 195     |
 
-contains a station's  data for a specific meteorological element over a one month interval.  The form of a record is: 
 
-ID PORTION (30 characters) Fixed Length 
 
-`       `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***   
 
-* REC **|**  STATION **|** ELEM **|     |      |    |     |      |** NUM  > 
-* TYP **|**    ID    **|** TYPE **|** UNT **|** YEAR **|** MO **| DUR |** FILL **|** VAL  > 
 
-`       `**\*\*\*\*\*\*|\*\*\*\*\*\*\*\*\*\*|\*\*\*\*\*\*|\*\*\*\*\*\*\*\*\*\*\*\*|\*\*\*\*|\*\*\*\*\*\*\*\*\*\*\*\*|\*\*\*\*\*\***   
+### Element Names and Definitions
 
-* XXX **|** XXXXXXXX **|** XXXX **|** XX  **|** XXXX **|** XX **|** XX  **|**  XX  **|** XXX  **>** 
-
-`       `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***   ELEMENTS 001     002       003   004    005   006  007    008   009 
-
-DATA PORTION (12 Characters, repeated 31 Times) 
-
-                **\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***           
-
-- DY **|** HR **|** MET. ELEM **|** FL **|** FL **|** DY **|** HR **|** MET. ELEM  **>** 
-- **|    |\*\*\*\*\*\*\*\*\*\*\*|    |    |    |    |\*\*\*\*\*\*\*\*\*\*  >** 
-- **|    |   |** DATA  **|    |    |    |    |   |** DATA   > 
-- **|    |** S **|** VALUE **|    |    |    |    |** S **|** VALUE  >  
-- **\*\*\*|\*\*\*\*|\*\*\*\*\*\*\*\*\*\*\*|\*\*\*\*|\*\*\*\*|\*\*\*\*|\*\*\*\*|\*\*\*|\*\*\*\*\*\*  >**    
-- XX **|** XX **|** X ***|*** XXXXX **|**  X **|**  X **|** XX **|** XX | X | XXXXX  **>**  
-
-                **\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
-
-ELEMENTS     010  011  012   013    014  015  016  017 018   019 
-
-                **\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
-
-- DY **|** HR **|** MET. ELEM **|** FL **|** FL **\*** 
-- **|    |\*\*\*\*\*\*\*\*\*\*\*|**  1 **|**  2 **\*** 
-- **|    |   |** DATA  **|    |    \*** 
-- **|    |** S **|** VALUE **|    |    \*** 
-- **\*\*\*|\*\*\*\*|\*\*\*|\*\*\*\*\*\*\*|\*\*\*\*|\*\*\*\*\*** 
-- XX **|** XX **|** X **|** XXXXX |  X **|**  X **\*** 
-
-`              `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** ELEMENTS      190  191 192   193    194   195  
-
-6. **Element Names and Definitions**: 
-
-RECORD TYPE 
+**RECORD TYPE** 
 
 The type of data stored in this record.  (Value is "DLY"). Each record contains one month of daily values. 
 
-STATION-ID 
+**STATION-ID** 
 
 This 8-character alphanumeric station identifier is assigned by the National Climatic Data Center.  The first two digits refer to a state code (value range is 01-91; reference Table "A").  The next four digits refer to the Cooperative Network Index number (value range is 0001-9999).  The last two digits are the Cooperative Network Division Number (value range is 01-10; 99 = Missing Division Number; reference Table "B"). 
 
@@ -542,179 +479,181 @@ METEOROLOGICAL ELEMENT-TYPE
 
 The type of meteorological elements stored in this record.  Range of values is listed below. 
 
-BARP 
+##### BARP 
 
 Barometric pressure, unadjusted instrument reading.  Unit Measurement, Thousandths of Inches of Mercury. 
 
-BPTI 
+##### BPTI 
 
 Barometric pressure, instrument reading adjusted for temperature and instrument correction.  Unit Measurement, Thousandths of Inches of Mercury. 
 
-BPSL 
+##### BPSL 
 
 Barometric pressure, instrument reading adjusted for temperature and instrument correction and reduced to sea level.  Unit Measurement, Thousandths of Inches of Mercury. 
 
-CLSK 
+##### CLSK 
 
 Clearness of sky, on a scale of 0-10, with clear sky being 10, and cloudy being 0.   
 
-CLDL, CLDU 
+##### CLDL, CLDU 
 
 Cloud direction of motion.  CLDL for lower clouds; CLDU for upper clouds.  Unit Measurement, Whole Degrees. 
 
-CLTL, CLTU 
+##### CLTL, CLTU 
 
 Cloud type (reference Table "C").  CLTL for lower clouds; CLTU for upper clouds. 
 
-CLVL, CLVU 
+##### CLVL, CLVU 
 
 Cloud velocity – speed component.  CLVL for lower clouds; CLVU for upper clouds.  Unit Measurement, Whole Miles per Hour. 
 
-DPTP 
+##### DPTP 
 
 Dew point temperature.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-DPTD 
+##### DPTD 
 
 Dew point temperature depression.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-DYSW
+##### DYSW
 
 Daily occurrence of weather, including all different types of weather occurring that day (reference Table "D"). 
 
-MNTP 
+##### MNTP 
 
 Mean daily temperature, for 24-hour period ending at observation time.  Generally, this mean is calculated from the average of the maximum and minimum daily temperatures, when available.  See Section 33 – Station Data Time Averaging.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-MNTO 
+##### MNTO 
 
 Mean daily temperature, for 24-hour period ending at observation time.  Generally, this mean is calculated from the average of three point measurements of the temperature observed over the course of the 24-hour period.  See Section 33 – Station Data Time Averaging.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-PTYP 
-
-Precipitation type (reference Table "E").   PRCP 
-
+##### PTYP
+Precipitation type (reference Table "E").   
+##### PRCP
 Daily precipitation.  Trace is less than 0.005 inch.  Unit Measurement, Hundredths of Inches.  
 
-RGHT 
+##### RGHT 
 
 River gauge height, or height of other body of water.  Point measurement at time of observation.  Unit Measurement, Tenths of Feet. 
 
-RGHC 
+##### RGHC 
 
 Daily change in river gauge height, or height of other body of water. Change ending at time of observation.  Unit Measurement, Tenths of Feet. 
 
-RHUM 
+##### RHUM 
 
 Relative Humidity.  Point measurement at the time of observation.  Unit Measurement, Whole Percent. 
 
-SKYL, SKYU 
+##### SKYL, SKYU 
 
 Daily cloudiness.  SKYL for measurement of lower clouds; SKYU for measurement of upper clouds.  Clear is zero coverage of the sky by clouds; “10” is completely cloudy.  Unit Measurement, Scale of 0-10.  This element was sometimes recorded on a scale of 0-4; when this is occurred is not indicated in the daily data at this time. 
 
-SMEL 
+##### SMEL 
 
 Water equivalent of melted snowfall.  Trace is less than 0.05 inch.  Unit Measurement, Hundredths of Inches. 
 
-SNOW 
+##### SNOW 
 
 Daily snowfall.  Sleet and hail may or may not be included in the snowfall measurement, depending on the general and specific observer practices of the time.  Trace is less than 0.05 inch.  Unit Measurement, Hundredths of Inches. 
 
-SNWD 
+##### SNWD 
 
 Snow depth at observation time.  Snow depth is depth of snow on the ground at time of observation.  Trace is depth less than 0.5 inch. Unit Measurement, Tenths of Inches. 
 
-STWX 
+##### STWX 
 
 State of the weather at time of observation (reference Table "D"). TAHR 
 
 Temperature measurement.  Point measurement at time of observation.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TBAR 
+##### TBAR 
 
 Temperature measurement using thermometer attached to barometer.  Used to adjust barometer reading for temperature.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TMAX 
+##### TMAX 
 
 Daily maximum temperature.  Maximum temperature reading for 24 hours ending at time of observation. Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TMIN 
+##### TMIN 
 
 Daily minimum temperature.  Minimum temperature reading for 24 hours ending at time of observation. Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TMPD 
+##### TMPD 
 
 Dry bulb temperature.  Point measurement at time of observation.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TMDW 
+##### TMDW 
 
 Wet bulb temperature.  Point measurement at time of observation.  Unit Measurement, Hundreths of Degrees Fahrenheit. 
 
-TPBG, TPEN 
+##### TPBG, TPEN 
 
 Time of beginning and ending of precipitation.  TPBG and TPEN for time of beginning and ending for 24-hour observation of precipitation events (one time of beginning and ending within each 24-hour period). Unit Measurement, Hour and Minutes, AM/PM indicator (reference Table "F"). 
 
-TRNG 
+##### TRNG 
 
 Daily temperature range.  Maximum temperature minus minimum temperature. Unit Measurement, Whole Degrees Fahrenheit. 
 
-TWAR 
+##### TWAR 
 
 Surface air temperature observed at location of water temperature observation.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TWBT 
+##### TWBT 
 
 Bottom water temperature.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-TWDP 
+##### TWDP 
 
 Depth of water for TWBT – bottom water temperature observation.  Unit Measurement, Tenths of Feet. 
 
-TWSR 
+##### TWSR 
 
 Surface water temperature.  Unit Measurement, Hundredths of Degrees Fahrenheit. 
 
-WD16 
+##### WD16 
 
 Prevailing wind direction.  Unit Measurement, 8-Point or 16-Point Compass Directions, Expressed as Whole Degrees (Calm is “0”, North is “360”, Changing or Variable is “991”). 
 
-WDDM 
+##### WDDM 
 
 Maximum wind direction.  Unit Measurement, 8-Point or 16-Point Compass Directions, Expressed as Whole Degrees (Calm is “0”, North is “360”, Changing or Variable is “991”). 
 
-WDFC 
+##### WDFC 
 
 Prevailing wind force.  Unit Measurement, Scale of 0-10 or Scale of 0-12; which scale was used is not indicated in the daily data at this time. 
 
-WDMV 
+##### WDMV 
 
-Total wind movement.  Unit Measurement, Whole Miles. WDVL 
+Total wind movement.  Unit Measurement, Whole Miles. 
+##### WDVL 
 
 Prevailing wind velocity, speed component.  Unit Measurement, Whole Miles. 
 
-WDVM 
+##### WDVM 
 
 Maximum wind velocity, speed component.  Unit Measurement, Miles per Hour. 
 
-METEOROLOGICAL ELEMENT MEASUREMENT UNITS CODE 
+**<ins>METEOROLOGICAL ELEMENT MEASUREMENT UNITS CODE</ins>** 
 
 The units and decimal position (precision) of the data value for this record (reference Table "G"). 
 
-YEAR 
+<ins>YEAR 
 
 This is the year of the record.  Range of values is 1800-current year processed. 
 
-MONTH 
+<ins>MONTH 
 
-This is the month of the record.  Range of values is 01-12 LST. DURATION 
+This is the month of the record.  Range of values is 01-12 LST. 
+
+<ins>DURATION 
 
 This is the number of hours over which the observation was collected.  Range of values is 00-24, and 99 for missing.  A duration of 00 indicates a point  measurement in time, while 24 indicates a true daily observation. 
 
-FILLER 
+<ins>FILLER 
 
 Filler value is 99. 
 
-NUMBER OF DATA PORTIONS THAT FOLLOW  
+<ins>NUMBER OF DATA PORTIONS THAT FOLLOW  
 
 This notes the actual number of values reported.  Range of values is 01-62. 
 
@@ -722,25 +661,42 @@ NOTE:  A record may contain fewer or more data values than you might expect.  A 
 
 A maximum of two DATA PORTIONS are used for each day of the month so as to allow one original meteorological data value and one edited data value.  The only exception at this time, is that the  "days with weather" element-types (DYSW) of original data values can be reported in multiple logical records (e.g. only one original DYSW Data Portion for each day is given within a single DLY logical record).  When more than two types of weather on any given day, a new DLY logical record for the same month will exists until DYSW is exhausted.  At most, 62 data values may be contained in any given logical record (e.g., 30 + (62 x 12) = 774 characters).  Thus, while a maximum of 1,230 characters has been assigned, no more than 774 characters will be used for the daily data record types. 
 
-If a particular data value was not taken or is unavailable, there is no entry for it.  (For meteorological elements observed once a day, if all the daily observations of a given month are received and pass QC checks, there will be one DATA PORTION for each day. If every value were to fail the QC, there may be two DATA PORTIONS for every day of that month.  When two DATA PORTIONS for 
+If a particular data value was not taken or is unavailable, there is no entry for it.  (For meteorological elements observed once a day, if all the daily observations of a given month are received and pass QC checks, there will be one DATA PORTION for each day. If every value were to fail the QC, there may be two DATA PORTIONS for every day of that month.  When two DATA PORTIONS for a daily record are encountered (with the exception of DYSW), the original data values are flagged and the second DATA PORTION is the best possible replacement.  (See code definitions for the Flag 2 element). 
 
-a daily record are encountered (with the exception of DYSW), the original data values are flagged and the second DATA PORTION is the best possible replacement.  (See code definitions for the Flag 2 element). 
-
-DAY OF MONTH 
+<ins>DAY OF MONTH 
 
 Contains the day of the month on which the data element was observed.  Range of values is 01-33. Day 32 is the monthly sum; Day 33 is the monthly average. 
 
-HOUR OF OBSERVATION 
+<ins>HOUR OF OBSERVATION 
 
 Contains the hour of the daily observation.  Hour is reported using the 24- hour clock 00-23 LST.  Other codes for non-specific hours are listed in the table below. 
 
-Sunrise  91 Sunset  92 Morning  93 Afternoon  94 Evening, night  95 Missing hour  99 Midnight  0 Noon  12 
+* Sunrise 91 
+* Sunset 92 
+* Morning  93 
+* Afternoon 94 
+* Evening, night 95 
+* Missing hour 99 
+* Midnight  0 
+* Noon  12 
 
-SIGN OF METEOROLOGICAL VALUE 
+
+|     Sunrise      | 91  |
+|:----------------:|-----|
+|      Sunset      | 92  |
+|     Morning      | 93  |
+|    Afternoon     | 94  |
+|  Evening, night  | 95  |
+|   Missing hour   | 99  |
+|     Midnight     | 00  |
+|       Noon       | 12  |
+
+
+<ins>SIGN OF METEOROLOGICAL VALUE 
 
 The algebraic sign of the meteorological data value is given as either a blank or a minus sign (-).  Blank indicates a positive value and a minus sign represents a negative value (see topic 45 "Data Quality: Known Uncorrected Problems"). 
 
-VALUE OF METEOROLOGICAL ELEMENT 
+<ins>VALUE OF METEOROLOGICAL ELEMENT 
 
 The actual data value is given as a five-digit integer, except for cloud type, precipitation type, precipitation time of beginning and ending, and days with weather/state of the weather.  (Tables “C” through “F”). 
 
@@ -748,91 +704,81 @@ For fixed length records only when a data value is missing, the sign of the data
 
 When no daily precipitation reading was taken but the amount from that day (if any) is included in a subsequent value, the data value of precipitation is set equal to "99999" and flagged with an "S" in flag position 1.  In turn, the successive accumulated amount will be flagged with an "A" in flag position 1.  
 
-FLAG1 
+<ins>FLAG1 
 
-The Data Measurement FLAG (reference Table "H"). 
+The Data Measurement FLAG (reference [Table H](#TABLEH).) 
 
-FLAG2 
+<ins>FLAG2 
 
-The Data Quality FLAG (reference Table "I"). 
+The Data Quality FLAG (reference [Table I](#TABLEI).)
 
-**TABLES** 
+#### <INS>TABLES 
 
-**TABLE “A” State-Code Table** 
-
-18
-
-01 Alabama      02 Arizona      03 Arkansas 
-
-04 California 05 Colorado 
-
-06 Connecticut  07 Delaware 
-
-08 Florida      09 Georgia      10 Idaho 
-
-11 Illinois 
-
-12 Indiana      13 Iowa 
-
-14 Kansas  
-
-15 Kentucky 
-
-16 Louisiana 
-
-17 Maine 
-
-18 Maryland 
-
-19 Massachusetts 20 Michigan 
-
-21 Minnesota 
-
-22 Mississippi  23 Missouri 
-
-24 Montana      25 Nebraska     26 Nevada    27 New Hampshire 
-
-28 New Jersey 
-
-29 New Mexico 
-
-30 New York 
-
-31 North Carolina 32 North Dakota 33 Ohio 
-
-34 Oklahoma 
-
-35 Oregon 
-
-36 Pennsylvania 37 Rhode Island 38 South Carolina 39 South Dakota 40 Tennessee 
-
-41 Texas 
-
-42 Utah 
-
-43 Vermont 
-
-44 Virginia 
-
-45 Washington 
-
-46 West Virginia 47 Wisconsin 
-
-48 Wyoming 
-
-49 Not Used 
-
-50 Alaska 
-
-51 Hawaii 
-
-66 Puerto Rico 
-
-67 Virgin Islands 91 Pacific Islands 
+##### TABLE A
+State-Code Table
 
 
 
-**TABLE "B"** 
+|Code|State|
+|----|-----|
+|01 |Alabama      |
+|02 |Arizona      |
+|03 |Arkansas     |
+|04 |California   |
+|05 |Colorado     |
+|06 |Connecticut  |
+|07 |Delaware     |
+|08 |Florida      |
+|09 |Georgia      |
+|10 |Idaho        |
+|11 |Illinois     |
+|12 |Indiana      |
+|13 |Iowa         |
+|14 |Kansas       |
+|15 |Kentucky     |
+|16 |Louisiana    |
+|17 |Maine        |
+|18 |Maryland     |
+|19 |Massachusetts|
+|20 |Michigan     |
+|21 |Minnesota    |
+|22 |Mississippi  |
+|23 |Missouri     |
+|24 |Montana      |
+|25 |Nebraska     |
+|26 |Nevada       |
+|27 |New Hampshire|
+|28 |New Jersey   |
+|29 |New Mexico   |
+|30 |New York     |
+|31 |North Carolina|
+|32 |North Dakota |
+|33 |Ohio         |
+|34 |Oklahoma     |
+|35 |Oregon       |
+|36 |Pennsylvania |
+|37 |Rhode Island |
+|38 |South Carolina|
+|39 |South Dakota |
+|40 |Tennessee    |
+|41 |Texas        |
+|42 |Utah         |
+|43 |Vermont      |
+|44 |Virginia     |
+|45 |Washington   |
+|46 |West Virginia|
+|47 |Wisconsin    |
+|48 |Wyoming      |
+|49 |Not Used     |
+|50 |Alaska       |
+|51 |Hawaii       |
+|66 |Puerto Rico  |
+|67 |Virgin Island|
+|91 |Pacific Islan|
+
+
+
+##### TABLE B 
 
 **Cooperative Network Division Table** NOTE:  The division number for a station may change over time.            HAWAII (STATE 51)\* 
 
@@ -850,7 +796,7 @@ PACIFIC ISLANDS (STATE 91) Division
 
 04 -  Caroline and Marshall Islands 
 
-**TABLE "C"** 
+##### TABLE C 
 
 **CLTL, CLTU – Cloud Type Table** 
 
