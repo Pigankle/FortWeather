@@ -1,4 +1,4 @@
-﻿**DSI-3297** 
+﻿** DSI-3297** 
 
 **CDMP COOP SUMMARY OF THE DAY FORTS** 
 
@@ -10,84 +10,106 @@
 
 **March 2010** 
 
-This document was prepared by the U.S. Department of Commerce, National Oceanic and Atmospheric Administration, National Environmental Satellite Data and Information Service, Midwestern Regional Climate Center, Champaign, Illinois, and the National Climatic Data Center, Asheville, North Carolina.   
+  _**Converted to Markdown 2022 by Adam Price**_
 
-This document is designed to provide general information on the current, origin, format, integrity and the availability of this data file. 
+_This document was prepared by the U.S. Department of Commerce, National Oceanic and Atmospheric Administration, National Environmental Satellite Data and Information Service, Midwestern Regional Climate Center, Champaign, Illinois, and the National Climatic Data Center, Asheville, North Carolina._   
 
-Errors found in this document should be brought to the attention of the Data Base Administrator, NCDC.  See topic 58 for a summary of this data set. 
+_This document is designed to provide general information on the current, origin, format, integrity and the availability of this data file._ 
 
-Table of Contents 
+_Errors found in this document should be brought to the attention of the Data Base Administrator, NCDC.  See topic 58 for a summary of this data set._
 
-`                                                              `Page      Topic                                                  Number 
+# Table of Contents 
 
-INTRODUCTORY TOPICS               
 
-1. Data Set ID................................................4 
-1. Data Set Name..............................................4 
-1. Data Set Aliases...........................................4 
+## [INTRODUCTORY TOPICS](#Introductory-Topics)               
 
-\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ DESCRIPTION 
+1. [Data Set ID................................................4](#1.-Data Set ID:) 
+2. [Data Set Name..............................................4](###Data Set Name) 
+3. [Data Set Aliases...........................................4](###Data Set Aliases) 
 
-4. Access Method and Sort for Archived Data...................4 
-4. Access Method and Sort for Supplied Data...................8 
-4. Element Names and Definitions.............................10 
-4. Start Date................................................17 
-4. Stop Date.................................................17 
-4. Parameter.................................................17 
-4. Discipline................................................17 
-4. Coverage..................................................17 
-4. Location..................................................18 
-4. Keyword...................................................18 
-4. Storage Medium............................................18 
-4. File Mode.................................................18 
-4. How to Acquire the Data...................................18 
-4. Historical and Current Data Sources.......................18 
-4. Data Derivation, Algorithms...............................19 
-4. Data Derivation Algorithms, Responsibility for............19 
-4. Project...................................................19 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_  DATA CENTER 
-4. Data Center, Archiving ...................................19 
-4. Data Center, Originating .................................19 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ PERSONNEL 
-4. Archiver..................................................19 
-4. Technical Contact.........................................19 
-4. Investigator..............................................19 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ SENSORS 
-4. Sensor Name and Operating Principles......................19 
-4. Sensor Siting.............................................20 
-4. Sensor Accuracy and Calibration...........................20 
-4. Sensor Sampling Characteristics...........................20 
-4. Data Capture Method at/near Sensor........................20 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ STATIONS 
-4. Station Location Accuracy.................................20 
-4. Station Observation Schedule..............................20 
-4. Station Data Time Averaging............................... 20 
-4. Station Groupings, using Spatial Sampling.................20 
-4. Network Participation.....................................20 
-4. Geographical Criteria for Selecting Stations..............21 
-4. Geographical Distribution.................................21 
-4. Elevation Distribution....................................21 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ DATA QUALITY 
-4. Instrument Problems.......................................21 
-4. Missing Data Periods......................................21 
-41. Sampling Biases...........................................21 
-41. Error Detection and Correction............................21 
-41. Missing Value Estimates...................................22 
-41. Quality Control Responsibility............................22 
-41. Known Uncorrected Problems................................22 
-41. Confidence Factors........................................22 
-41. History of Data Usage.....................................22 
-41. Quality Statement.........................................22 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ DATES 
-41. Revision Date.............................................22 
-41. Science Review Date.......................................22 
-41. Future Review Date........................................23 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ OTHER DATA SETS 
-41. Input Sources to this Data Set............................23 
-41. Essential Companion Data Sets.............................23 
-41. Derived from this Data Set................................23 
-41. Larger Collections........................................23 
-41. Similar Data Sets.........................................23 \_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ SUMMARIZATION 
-41. Reference.................................................23 
-41. Summary...................................................23 Glossary.......................................................24 
+
+____________________________________________________
+ ## [DESCRIPTION](##DESCRIPTION) 
+
+4. [Access Method and Sort for Archived Data...................4](###Access Method and Sort for Archived Data) 
+5. [Access Method and Sort for Supplied Data...................8](###Access Method and Sort for Supplied Data) 
+6. [Element Names and Definitions.............................10](###Element Names and Definitions) 
+7. [Start Date................................................17](###Start-Date) 
+8. [Stop Date.................................................17](###Stop-Date) 
+9. [Parameter.................................................17](###Parameter) 
+10. [Discipline................................................17](###Discipline) 
+11. [Coverage..................................................17](###Coverage) 
+12. [Location..................................................18](###Location) 
+13. [Keyword...................................................18](###Keyword) 
+14. [Storage Medium............................................18](###Storage-Medium) 
+15. [File Mode.................................................18](###File-Mode) 
+16. [How to Acquire the Data...................................18](###How to Acquire the Data) 
+17. [Historical and Current Data Sources.......................18](###Historical and Current Data Sources) 
+18. [Data Derivation, Algorithms...............................19](###Data Derivation Algorithms) 
+19. [Data Derivation Algorithms, Responsibility for............19](###Data Derivation Algorithms Responsibility for) 
+20. [Project...................................................19](###Project) 
+____________________________________________________
+ ## [DATA CENTER](## DATA CENTER) 
+21. [Data Center, Archiving ...................................19](###Data Center Archiving ) 
+22. [Data Center, Originating .................................19](###Data Center Originating ) 
+____________________________________________________
+ ## [PERSONNEL](#PERSONNEL) 
+23. [Archiver..................................................19](###Archiver) 
+24. [Technical Contact.........................................19](###Technical Contact) 
+25. [Investigator..............................................19](###Investigator) 
+____________________________________________________
+ ## [SENSORS](##SENSORS) 
+26. [Sensor Name and Operating Principles......................19](###Sensor Name and Operating Principles) 
+27. [Sensor Siting.............................................20](###Sensor Siting) 
+28. [Sensor Accuracy and Calibration...........................20](###Sensor Accuracy and Calibration) 
+29. [Sensor Sampling Characteristics...........................20](###Sensor Sampling Characteristics) 
+30. [Data Capture Method at/near Sensor........................20](###Data Capture Method at/near Sensor) 
+____________________________________________________
+ ## [STATIONS](##STATIONS) 
+31. [Station Location Accuracy.................................20](###Station Location Accuracy) 
+32. [Station Observation Schedule..............................20](###Station Observation Schedule) 
+33. [Station Data Time Averaging...............................](###Station Data Time Averaging) 20 
+34. [Station Groupings, using Spatial Sampling.................20](###Station Groupings, using Spatial Sampling) 
+35. [Network Participation.....................................20](###Network Participation) 
+36. [Geographical Criteria for Selecting Stations..............21](###Geographical Criteria for Selecting Stations) 
+37. [Geographical Distribution.................................21](###Geographical Distribution) 
+38. [Elevation Distribution....................................21](###Elevation Distribution) 
+____________________________________________________
+ ## [DATA QUALITY](##DATA QUALITY) 
+39. [Instrument Problems.......................................21](###Instrument Problems) 
+40. [Missing Data Periods......................................21](###Missing Data Periods) 
+41. [Sampling Biases...........................................21](###Sampling Biases) 
+42. [Error Detection and Correction............................21](###Error Detection and Correction) 
+43. [Missing Value Estimates...................................22](###Missing Value Estimates) 
+44. [Quality Control Responsibility............................22](###Quality Control Responsibility) 
+45. [Known Uncorrected Problems................................22](###Known Uncorrected Problems) 
+46. [Confidence Factors........................................22](###Confidence Factors) 
+47. [History of Data Usage.....................................22](###History of Data Usage) 
+48. [Quality Statement.........................................22](###Quality Statement) 
+____________________________________________________
+ ## [DATES](##DATES) 
+49. [Revision Date.............................................22](###Revision Date) 
+50. [Science Review Date.......................................22](###Science Review Date) 
+51. [Future Review Date........................................23](###Future Review Date) 
+____________________________________________________
+ ## [OTHER DATA SETS](##OTHER DATA SETS) 
+52. [Input Sources to this Data Set............................23](###Input Sources to this Data Set) 
+53. [Essential Companion Data Sets.............................23](###Essential Companion Data Sets) 
+54. [Derived from this Data Set................................23](###Derived from this Data Set) 
+55. [Larger Collections........................................23](###Larger Collections) 
+56. [Similar Data Sets.........................................23](###Similar Data Sets) 
+____________________________________________________
+ ## [SUMMARIZATION](##SUMMARIZATION) 
+57. [Reference.................................................23](###Reference) 
+58. [Summary...................................................23](###Summary) 
+59. [Glossary..................................................24](#Glossary) 
 
 Appendix A. Digitization of Historical Daily Cooperative Network Data Appendix B. Documentation of Problems with and Changes Made to Keyed Data 
 
-1. **Data Set ID:** CDMP-Forts 
-1. **Data Set Name:** 
+## Introductory Topics
+### 1. Data Set ID:
+** CDMP-Forts 
+### 2.**Data Set Name:** 
 
 COOP Summary of the Day – CDMP – 1700s and 1800s Forts and Other Voluntary Observers 
 
