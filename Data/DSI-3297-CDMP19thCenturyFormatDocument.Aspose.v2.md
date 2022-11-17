@@ -23,24 +23,24 @@ _Errors found in this document should be brought to the attention of the Data Ba
 
 ## [INTRODUCTORY TOPICS](#Introductory-Topics)               
 
-1. [Data Set ID................................................4](#1.-Data Set ID:) 
-2. [Data Set Name..............................................4](###Data Set Name) 
-3. [Data Set Aliases...........................................4](###Data Set Aliases) 
+### [Data Set ID................................................4](#1-Data-Set-ID) 
+### [Data Set Name..............................................4](###Data Set Name) 
+### [Data Set Aliases...........................................4](###Data Set Aliases) 
 
 
 ____________________________________________________
  ## [DESCRIPTION](##DESCRIPTION) 
 
-4. [Access Method and Sort for Archived Data...................4](###Access Method and Sort for Archived Data) 
-5. [Access Method and Sort for Supplied Data...................8](###Access Method and Sort for Supplied Data) 
-6. [Element Names and Definitions.............................10](###Element Names and Definitions) 
-7. [Start Date................................................17](###Start-Date) 
-8. [Stop Date.................................................17](###Stop-Date) 
-9. [Parameter.................................................17](###Parameter) 
-10. [Discipline................................................17](###Discipline) 
-11. [Coverage..................................................17](###Coverage) 
-12. [Location..................................................18](###Location) 
-13. [Keyword...................................................18](###Keyword) 
+[Access Method and Sort for Archived Data...................4](###Access Method and Sort for Archived Data) 
+[Access Method and Sort for Supplied Data...................8](###Access Method and Sort for Supplied Data) 
+[Element Names and Definitions.............................10](###Element Names and Definitions) 
+[Start Date................................................17](###Start-Date) 
+[Stop Date.................................................17](###Stop-Date) 
+[Parameter.................................................17](###Parameter) 
+ [Discipline................................................17](###Discipline) 
+ [Coverage..................................................17](###Coverage) 
+ [Location..................................................18](###Location) 
+ [Keyword...................................................18](###Keyword) 
 14. [Storage Medium............................................18](###Storage-Medium) 
 15. [File Mode.................................................18](###File-Mode) 
 16. [How to Acquire the Data...................................18](###How to Acquire the Data) 
