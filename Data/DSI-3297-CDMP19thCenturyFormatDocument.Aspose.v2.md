@@ -24,7 +24,7 @@ _Errors found in this document should be brought to the attention of the Data Ba
 
 ## [INTRODUCTORY TOPICS](#Introductory-Topics)               
 
-### [Data Set ID................................................4](#1-Data-Set-ID) 
+### [Data Set ID................................................4](#Data-Set-ID) 
 ### [Data Set Name..............................................4](#Data-Set-Name) 
 ### [Data Set Aliases...........................................4](#Data-Set-Aliases) 
 
@@ -44,13 +44,13 @@ ____________________________________________________
 ###  [Keyword...................................................18](#Keyword) 
 ### [Storage Medium............................................18](#Storage-Medium) 
 ### [File Mode.................................................18](#File-Mode) 
-### [How to Acquire the Data...................................18](#How to Acquire the Data) 
+### [How to Acquire the Data...................................18](#How-to-Acquire-the-Data) 
 ### [Historical and Current Data Sources.......................18](#Historical and Current Data Sources) 
 ### [Data Derivation, Algorithms...............................19](#Data Derivation Algorithms) 
 ### [Data Derivation Algorithms, Responsibility for............19](#Data Derivation Algorithms Responsibility for) 
 ### [Project...................................................19](#Project) 
 ____________________________________________________
- ## [DATA CENTER](# DATA CENTER) 
+ ## [DATA CENTER](#DATA CENTER) 
 ### [Data Center, Archiving ...................................19](#Data Center Archiving ) 
 ### [Data Center, Originating .................................19](#Data Center Originating ) 
 ____________________________________________________
@@ -116,17 +116,15 @@ ____________________________________________________
 
 COOP Summary of the Day – CDMP – 1700s and 1800s Forts and Other Voluntary Observers 
 
-3. **Data Set Aliases:**  
+### Data Set Aliases: 
 
-Surface Land Daily Cooperative Data Summary of the Day Data   
+* Surface Land Daily Cooperative Data Summary of the Day Data   
+* Co-op Data                
+* Climatological Data
+* Daily Weather Data
+* SOD                       
 
-Co-op Data                Climatological Data       
-
-Daily Weather Data        
-
-SOD                       
-
-4. **Access Method and Sort for Archived Data:** 
+### Access Method and Sort for Archived Data: 
 
 Data are archived in a variable length element file structure.  The element file structure is designed to allow maximum flexibility in requesting data.  Only those elements or groups of elements of particular interest need be ordered.  Archived data are currently sorted by Station-ID (excluding the Division Number) as the primary key and year, month, and meteorological element-type as secondary keys. 
 
@@ -143,88 +141,71 @@ Data may also be received in a fixed length record structure described in topic 
 Provided within this section are information and examples of how to access the Variable Length data records, specifically: 
 
 1. COBOL Data Description (1 example) 
-1. FORTRAN Data Descriptions (2 examples) 
-1. Control Language Notes 
-1. List of Variables ("Elements") 
+2. FORTRAN Data Descriptions (2 examples) 
+3. Control Language Notes 
+4. List of Variables ("Elements") 
 5. Schematic Variable Length Record Format Layout 
 
 The following COBOL and FORTRAN statements are to be used as guidelines only.  NCDC recognizes the fact that many different types of equipment are used in processing these data.  It is impossible to cover all the idiosyncrasies of every system. 
 
-1. **COBOL Data Description** 
+#### 1. **COBOL Data Description** 
 
 This is a typical ANSI Standard COBOL Variable Length Description. 
 
+```py 
+
 FD  INDATA 
-
-LABEL RECORDS ARE STANDARD 
-
-RECORDING MODE D 
-
-BLOCK CONTAINS 12000 CHARACTERS 
-
-DATA RECORD IS DATA-RECORD. 
+    LABEL RECORDS ARE STANDARD 
+    RECORDING MODE D 
+    BLOCK CONTAINS 12000 CHARACTERS 
+    DATA RECORD IS DATA-RECORD. 
 
 01  DATA-RECORD. 
+    02 RECORD-TYPE                PIC X(3).  
+    02 STATION-ID                 PIC X(8).                  02 ELEMENT-TYPE               PIC X(4).                02 ELEMENT-UNITS-CODE         PIC XX. 
+    02 YEAR                       PIC 9(4). 
+    02 MONTH                      PIC 99. 
+    02 FILLER                     PIC 9(4). 
+    02 NUMBER-VALUES              PIC 9(3). 
+    02 DAILY-ENTRY 
+        OCCURS 1 TO 100 TIMES DEPENDING ON NUMBER-VALUES.    04 DAY                     PIC 99. 
+       04 HOUR                    PIC 99. 
+       04 DATA-VALUE              PIC S9(5) SIGN LEADING SEPARATE. 
 
-02 RECORD-TYPE                PIC X(3).  
-
-02 STATION-ID                 PIC X(8).                  02 ELEMENT-TYPE               PIC X(4).                02 ELEMENT-UNITS-CODE         PIC XX. 
-
-02 YEAR                       PIC 9(4). 
-
-02 MONTH                      PIC 99. 
-
-02 FILLER                     PIC 9(4). 
-
-02 NUMBER-VALUES              PIC 9(3). 
-
-02 DAILY-ENTRY 
-
-OCCURS 1 TO 100 TIMES DEPENDING ON NUMBER-VALUES.    04 DAY                     PIC 99. 
-
-`   `04 HOUR                    PIC 99. 
-
-`   `04 DATA-VALUE              PIC S9(5) SIGN LEADING  
-
-`                                                 `SEPARATE. 
-
-`                    `04 D-VAL REDEFINES DATA-VALUE. 
-
-`                       `05 SIGN-VAL        PIC X. 
-
-`                       `05 DATA-IN         PIC X(5).  
-
-`                    `04 FLAG-1             PIC X. 
-
-`                    `04 FLAG-2             PIC X. 
-
-2. **FORTRAN Data Description** 
-1) FORTRAN 77 Example 1 
+            04 D-VAL REDEFINES DATA-VALUE. 
+                05 SIGN-VAL        PIC X. 
+                05 DATA-IN         PIC X(5).  
+            04 FLAG-1             PIC X. 
+            04 FLAG-2             PIC X. 
+```
+#### 2. FORTRAN Data Description** 
+(1) FORTRAN 77 Example 1 
 
 This description is for those systems that can handle variable blocked records normally. 
 
+```
 IMPLICIT INTEGER (A-Z) 
 
-`           `OPEN (10,FILE = 'FILENAME',ACCESS = 'SEQUENTIAL', STATUS = 'OLD', 
+			OPEN (10,FILE = 'FILENAME',ACCESS = 'SEQUENTIAL', STATUS = 'OLD', 
 
 + RFORM = 'VB',MRECL = 1230,TYPE = 'ANSI',BLOCK = 
 + 12000) 
 
-`    `C          LAST 2 lines of OPEN statement are SPERRY UNIQUE 
+	C          LAST 2 lines of OPEN statement are SPERRY UNIQUE 
 
-`           `DEFINE FILE 10 (ANSI, VB, 1230, 12000) 
+			DEFINE FILE 10 (ANSI, VB, 1230, 12000) 
 
-`     `CHARACTER\*3 RECTYP 
+			CHARACTER\*3 RECTYP 
 
-`     `CHARACTER\*8 STNID 
+			CHARACTER\*8 STNID 
 
-`     `CHARACTER\*4 ELMTYP 
+			CHARACTER\*4 ELMTYP 
 
-`     `CHARACTER\*2 EUNITS 
+			CHARACTER\*2 EUNITS 
 
-`     `CHARACTER\*1 FLAG1, FLAG2 
+			CHARACTER\*1 FLAG1, FLAG2 
 
-`           `DIMENSION IDAY(100), IHOUR(100), IVALUE(100), FLAG1(100), 
+			DIMENSION IDAY(100), IHOUR(100), IVALUE(100), FLAG1(100), 
 
 + FLAG2(100) 
 
@@ -234,134 +215,84 @@ IMPLICIT INTEGER (A-Z)
 + FLAG1(J), FLAG2(J), J=1, NUMVAL) 
 
 `       `20  FORMAT (A3, A8, A4, A2, I4, I2, I4, I3, 100(2I2, I6, 2A1))  
+```
 
-2) FORTRAN 77 Example 2 
+(2) FORTRAN 77 Example 2 
 
 This description is for those systems that can't handle variable blocked records normally. 
 
-`            `PROGRAM TAPEREAD 
+				PROGRAM TAPEREAD
+				IMPLICIT INTEGER (A-Z)
+				.....
+				OPEN(1,FILE=TAPE:',ACCESS='SEQUENTIAL',FORM=FORMATTED',
+                                  STATUS='OLD',READONLY)
+				CHARACTER BUFFER\*12000      ! YOUR MACHINE MUST SUPPORT
+                                                          ! CHARACTER VARIABLES THIS LARGE
+				CHARACTER\*3 RECTYP
+				CHARACTER\*8 STNID
+				CHARACTER\*4 ELMTYP
+				CHARACTER\*2 EUNITS
+				CHARACTER\*1 FLAG1, FLAG2
+				DIMENSION IDAY(100), IHOUR(100), IVALUE(100), FLAG1(100), 
+    + FLAG2(100)
+				.....
+                            NBYTES=0
+		5               NBEG=1
+				READ(1,101,END=99)BUFFER     !READ IN PHYSICAL RECORD (BLOCK)  
+        10                  NBEG=NBEG+NBYTES
+				READ(BUFFER(NBEG:NBEG+3,102)NBYTES   !READ THE CONTROL WORD             IF( NBYTES.EQ.0 )GO TO 5
+				READ(BUFFER(NBEG+4:NBEG+NBYTES-1),103) RECTYP, STNID, ELMTYP, EUNITS, 1YEAR, IMON, IFIL, NUMVAL, (DAY(J), IHOUR(J), IVALUE(J), FLAG1(J), FLAG2(J), J=1, NUMVAL)
+                .....
+                .....
+                GO TO 10 
+        99      CONTINUE
+                .....
+                .....
+                STOP 'FINISHED'
+        101      FORMAT(A)
+        102      FORMAT(I4)
+        103      FORMAT (A3, A8, A4, A2, I4, I2, I4, I3, 100(212, 16, 2A1))             END 
 
-`            `IMPLICIT INTEGER (A-Z) 
+#### 3. Control Language Notes** 
+(1) IBM JCL Notes 
+-- For ASCII Variable specify:
+```
+                LRECL   = 1234
+                RECFM   = DB 
+                OPTCODE = Q 
+```
+-- For EBCDIC Variable specify: 
+```
+                LRECL   = 1234 
+	            RECFM   = VB 
+```
+(2) VAX DCL Notes 
 
-`            `..... 
+    $ MOUNT/FOREIGN/BLOCKSIZE=12000 MT:  tapename TAPE:**  
 
-`            `OPEN(1,FILE=TAPE:',ACCESS='SEQUENTIAL',FORM=FORMATTED', 
+#### 4. List of Variables
 
-+ STATUS='OLD',READONLY) 
-
-`            `CHARACTER BUFFER\*12000      ! YOUR MACHINE MUST SUPPORT 
-
-! CHARACTER VARIABLES THIS LARGE 
-
-`            `CHARACTER\*3 RECTYP 
-
-`            `CHARACTER\*8 STNID 
-
-`            `CHARACTER\*4 ELMTYP 
-
-`            `CHARACTER\*2 EUNITS 
-
-`            `CHARACTER\*1 FLAG1, FLAG2 
-
-`            `DIMENSION IDAY(100), IHOUR(100), IVALUE(100), FLAG1(100) 
-
-+ FLAG2(100) 
-
-`            `..... 
-
-`            `NBYTES=0 
-
-`   `5        NBEG=1 
-
-`            `READ(1,101,END=99)BUFFER     !READ IN PHYSICAL RECORD (BLOCK)   10        NBEG=NBEG+NBYTES 
-
-`            `READ(BUFFER(NBEG:NBEG+3,102)NBYTES   !READ THE CONTROL WORD             IF( NBYTES.EQ.0 )GO TO 5 
-
-`            `READ(BUFFER(NBEG+4:NBEG+NBYTES-1),103) RECTYP, STNID, ELMTYP, 
-
-+ EUNITS, 1YEAR, IMON, IFIL, NUMVAL, (DAY(J), IHOUR(J), 
-+ IVALUE(J), FLAG1(J), FLAG2(J), J=1, NUMVAL) 
-
-`            `..... 
-
-`            `..... 
-
-`            `GO TO 10 
-
-`    `99      CONTINUE 
-
-`            `..... 
-
-`            `..... 
-
-`            `STOP 'FINISHED' 
-
-`   `101      FORMAT(A)    
-
-`   `102      FORMAT(I4) 
-
-`   `103      FORMAT (A3, A8, A4, A2, I4, I2, I4, I3, 100(212, 16, 2A1))             END 
-
-3. **Control Language Notes** 
-1) IBM JCL Notes 
-
-`             `For ASCII Variable specify: 
-
-`  `LRECL   = 1234 
-
-`  `RECFM   = DB 
-
-`  `OPTCODE = Q 
-
-`             `For EBCDIC Variable specify: 
-
-`  `LRECL   = 1234 
-
-`  `RECFM   = VB 
-
-2) VAX DCL Notes 
-
-`               `$ MOUNT/FOREIGN/BLOCKSIZE=12000 MT:  tapename TAPE:**  
-
-4. **List of Variables** 
-
-`  `ELEMENT                                   WIDTH          POSITION       
-
-` `001  RECORD TYPE (= DLY)                     3            001-003 **--**    
-
-` `002  STATION ID                              8            004-011  **|**    
-
-` `003  METEOROLOGICAL ELEMENT TYPE             4            012-015  **|**  
-
-` `004  MET. ELEMENT MEASUREMENT UNITS CODE     2            016-017   -- ID  005  YEAR                                    4            018-021  **|**   PORTION 
-
-` `006  MONTH                                   2            022-023  **|**   
-
-` `007  AMOUNT OF TIME BETWEEN MEASUREMENTS     2            024-025  **|** 
-
-` `008  FILLER (= 99)                           4            026-027  **|**   
-
-` `009  NUMBER OF DATA PORTIONS THAT FOLLOW     3            028-030 **--** 
-
-` `010  DAY OF MONTH                            2            031-032 **--**     
-
-` `011  HOUR OF OBSERVATION                     2            033-034  **|**  
-
-` `012  SIGN OF METEOROLOGICAL ELEMENT VALUE    1            035       **--** DATA       VALUE OF METEOROLOGICAL ELEMENT         5            036-040  **|**   PORTION 
-
-`      `QUALITY CONTROL FLAG 1                  1            041      **|**   
-
-`      `QUALITY CONTROL FLAG 2                  1            042     **--**  
-
-`      `DATA GROUPS IN THE SAME FORM AS ELEMENT 12           043-054  DATA PORTION     
-
-`      `POSITIONS 31-42 REPEATED AS MANY        12           055-066  DATA PORTION     
-
-`      `TIMES AS NEEDED TO CONTAIN ONE MONTH    12           067-078  DATA PORTION   
-
-`      `OF RECORDS.                           .....          .....     
-
-` `608                                          12           1219-1230  DATA PORTION 
+    | ### | ELEMENT | WIDTH | POSITION | PORTION TYPE |
+    |:-----:|:-----------------------------|----|---------|--------------"|
+    |001 | RECORD TYPE (= DLY) |  3 | 001-003  | ID PORTION |
+    |002 | STATION ID | 8 | 004-011 | ID PORTION |
+    |003 | METEOROLOGICAL ELEMENT TYPE |  4 | 012-015 | ID PORTION |  
+    |004 | MET. ELEMENT MEASUREMENT UNITS CODE |  2 | 016-017 |   ID PORTION | 
+    |005 | YEAR | 4 | 018-021 |  ID PORTION |  
+    |006 | MONTH |  2 | 022-023 |  ID PORTION |  
+    |007 | AMOUNT OF TIME BETWEEN MEASUREMENTS |  2 | 024-025 |  ID PORTION | 
+    |008 | FILLER (= 99) |  4 | 026-027 |  ID PORTION |  
+    |009 | NUMBER OF DATA PORTIONS THAT FOLLOW |  3 | 028-030 | ID PORTION | 
+    |010 | DAY OF MONTH | 2 | 031-032 | DATA PORTION |  
+    |011 | HOUR OF OBSERVATION |  2 | 033-034 |  DATA PORTION | 
+    |012 | SIGN OF METEOROLOGICAL ELEMENT VALUE | 1 | 035 |    DATA PORTION | 
+    | | VALUE OF METEOROLOGICAL ELEMENT |  5 | 036-040 |    DATA PORTION |
+    | | QUALITY CONTROL FLAG 1 | 1 | 041 |  DATA PORTION |  
+    | | QUALITY CONTROL FLAG 2 | 1 | 042 |   DATA PORTION | 
+    | | DATA GROUPS IN THE SAME FORM AS ELEMENT | 12 |  043-054 | DATA PORTION |  
+    | | POSITIONS 31-42 REPEATED AS MANY | 12 |  055-066 | DATA PORTION |  
+    | | TIMES AS NEEDED TO CONTAIN ONE MONTH OF RECORDS | 12 |  067-078 | DATA PORTION |
+|608 | |12 |  1219-1230 | DATA PORTION 
 
 5. **Format  (Variable Length Record Layout)**              
 1. The first eight elements (positions 001-030) constitute the ID PORTION 
@@ -398,7 +329,7 @@ DATA PORTION (12 Characters, repeated "NUM-VAL" times--up to 100)
 
 `          `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** ELEMENTS  010  011   012   013    014  015  016  017  018    019   020  021 
 
-`           `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***               
+			**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***               
 
 - DY **|** HR **|** MET. ELEM **|** FL **|** FL **\***             
 - **|    |           |**  1 **|**  2 **\***             
@@ -410,7 +341,7 @@ DATA PORTION (12 Characters, repeated "NUM-VAL" times--up to 100)
 
 - XX **|** XX **|** X **|** XXXXX **|**  X **|**  X **\*** 
 
-`           `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
+			**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
 
 ELEMENTS   604  605  606   607    608  609 
 
@@ -434,33 +365,33 @@ This is a typical ANSI Standard COBOL Fixed Record Length Description
 
 `      `FD   INDATA 
 
-`           `LABEL RECORDS ARE STANDARD (FOR STD LABEL TAPES) 
+			LABEL RECORDS ARE STANDARD (FOR STD LABEL TAPES) 
 
-`           `RECORDING MODE F 
+			RECORDING MODE F 
 
-`           `BLOCK CONTAINS 15 RECORDS 
+			BLOCK CONTAINS 15 RECORDS 
 
-`           `DATA IS DATA-RECORD 
+			DATA IS DATA-RECORD 
 
 `      `01   DATA RECORD 
 
-`           `02  RECORD-TYPE         PIC X(3).  
+			02  RECORD-TYPE         PIC X(3).  
 
-`           `02  STATION-ID          PIC X(8). 
+			02  STATION-ID          PIC X(8). 
 
-`           `02  ELEMENT-TYPE        PIC X(4). 
+			02  ELEMENT-TYPE        PIC X(4). 
 
-`           `02  ELEMENT-UNITS       PIC XX. 
+			02  ELEMENT-UNITS       PIC XX. 
 
-`           `02  YEAR                PIC 9(4). 
+			02  YEAR                PIC 9(4). 
 
-`           `02  MONTH               PIC 99. 
+			02  MONTH               PIC 99. 
 
-`           `02  FILLER              PIC 9(4). 
+			02  FILLER              PIC 9(4). 
 
-`           `02  NUMBER-VALUES       PIC 9(3). 
+			02  NUMBER-VALUES       PIC 9(3). 
 
-`           `02  DAILY-ENTRY 
+			02  DAILY-ENTRY 
 
 `               `OCCURS 31 TIMES.  
 
@@ -503,7 +434,7 @@ This is a typical ANSI Standard COBOL Fixed Record Length Description
 
 3. **List of Variables**                      
 
-`  `ELEMENT                                      WIDTH   POSITION    
+		ELEMENT                                      WIDTH   POSITION    
 
 001   RECORD TYPE (= DLY)                        3     001-003**--**           002   STATION ID                                 8     004-011  **|**    
 
@@ -557,7 +488,7 @@ ID PORTION (30 characters) Fixed Length
 
 DATA PORTION (12 Characters, repeated 31 Times) 
 
-`             `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***           
+				**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\***           
 
 - DY **|** HR **|** MET. ELEM **|** FL **|** FL **|** DY **|** HR **|** MET. ELEM  **>** 
 - **|    |\*\*\*\*\*\*\*\*\*\*\*|    |    |    |    |\*\*\*\*\*\*\*\*\*\*  >** 
@@ -566,11 +497,11 @@ DATA PORTION (12 Characters, repeated 31 Times)
 - **\*\*\*|\*\*\*\*|\*\*\*\*\*\*\*\*\*\*\*|\*\*\*\*|\*\*\*\*|\*\*\*\*|\*\*\*\*|\*\*\*|\*\*\*\*\*\*  >**    
 - XX **|** XX **|** X ***|*** XXXXX **|**  X **|**  X **|** XX **|** XX | X | XXXXX  **>**  
 
-`             `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
+				**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
 
 ELEMENTS     010  011  012   013    014  015  016  017 018   019 
 
-`             `**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
+				**\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*** 
 
 - DY **|** HR **|** MET. ELEM **|** FL **|** FL **\*** 
 - **|    |\*\*\*\*\*\*\*\*\*\*\*|**  1 **|**  2 **\*** 
