@@ -22,7 +22,7 @@ _Errors found in this document should be brought to the attention of the Data Ba
 
 
 
-## [INTRODUCTORY TOPICS](#Introductory-Topics)               
+## [INTRODUCTORY TOPICS](#INTRODUCTORY-TOPICS)               
 
 ### [Data Set ID                                                 ](#Data-Set-ID) 
 ### [Data Set Name                                               ](#Data-Set-Name) 
@@ -69,10 +69,10 @@ ____________________________________________________
  ## [STATIONS](#STATIONS) 
 ### [Station Location Accuracy                                   ](#Station-Location-Accuracy) 
 ### [Station Observation Schedule                                ](#Station-Observation-Schedule) 
-### [Station Data Time Averaging                                 ](#Station-Data Time-Averaging) 
+### [Station Data Time Averaging                                 ](#Station-Data-Time-Averaging) 
 ### [Station Groupings, using Spatial Sampling                   ](#Station-Groupings-using-Spatial-Sampling) 
 ### [Network Participation                                       ](#Network-Participation) 
-### [Geographical Criteria for Selecting Stations                ](#Geographical Criteria-for-Selecting-Stations) 
+### [Geographical Criteria for Selecting Stations                ](#Geographical-Criteria-for-Selecting-Stations) 
 ### [Geographical Distribution                                   ](#Geographical-Distribution) 
 ### [Elevation Distribution                                      ](#Elevation-Distribution) 
 ____________________________________________________
@@ -111,7 +111,7 @@ ____________________________________________________
 
 ## Introductory Topics
 ### Data Set ID:
-** CDMP-Forts 
+<ins>CDMP-Forts 
 ###  Data Set Name: 
 
 COOP Summary of the Day – CDMP – 1700s and 1800s Forts and Other Voluntary Observers 
