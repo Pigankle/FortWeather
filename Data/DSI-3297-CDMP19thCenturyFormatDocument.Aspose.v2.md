@@ -719,66 +719,31 @@ State-Code Table
 
 
 
-|Code|State|
-|----|-----|
-|01 |Alabama      |
-|02 |Arizona      |
-|03 |Arkansas     |
-|04 |California   |
-|05 |Colorado     |
-|06 |Connecticut  |
-|07 |Delaware     |
-|08 |Florida      |
-|09 |Georgia      |
-|10 |Idaho        |
-|11 |Illinois     |
-|12 |Indiana      |
-|13 |Iowa         |
-|14 |Kansas       |
-|15 |Kentucky     |
-|16 |Louisiana    |
-|17 |Maine        |
-|18 |Maryland     |
-|19 |Massachusetts|
-|20 |Michigan     |
-|21 |Minnesota    |
-|22 |Mississippi  |
-|23 |Missouri     |
-|24 |Montana      |
-|25 |Nebraska     |
-|26 |Nevada       |
-|27 |New Hampshire|
-|28 |New Jersey   |
-|29 |New Mexico   |
-|30 |New York     |
-|31 |North Carolina|
-|32 |North Dakota |
-|33 |Ohio         |
-|34 |Oklahoma     |
-|35 |Oregon       |
-|36 |Pennsylvania |
-|37 |Rhode Island |
-|38 |South Carolina|
-|39 |South Dakota |
-|40 |Tennessee    |
-|41 |Texas        |
-|42 |Utah         |
-|43 |Vermont      |
-|44 |Virginia     |
-|45 |Washington   |
-|46 |West Virginia|
-|47 |Wisconsin    |
-|48 |Wyoming      |
-|49 |Not Used     |
-|50 |Alaska       |
-|51 |Hawaii       |
-|66 |Puerto Rico  |
-|67 |Virgin Island|
-|91 |Pacific Islan|
+| Code   |  State        |   | Code       | State   | | Code  |State     |
+|-----|-------|-----|-----|--------|-----|-------|-------|
+|1| Alabama         | |19| Massachusetts  | | 37    | Rhode Island    |
+|2| Arizona         | |20| Michigan       | | 38    | South Carolina  |
+|3| Arkansas        | |21| Minnesota      | | 39    | South Dakota    |
+|4| California      | |22| Mississippi    | | 40    | Tennessee       |
+|5| Colorado        | |23| Missouri       | | 41    | Texas           |
+|6| Connecticut     | |24| Montana        | | 42    | Utah            |
+|7| Delaware        | |25| Nebraska       | | 43    | Vermont         |
+|8| Florida         | |26| Nevada         | | 44    | Virginia        |
+|9| Georgia         | |27| New Hampshire  | | 45    | Washington      |
+|10| Idaho           | |28| New Jersey     | | 46    | West Virginia   |
+|11| Illinois        | |29| New Mexico     | | 47    | Wisconsin       |
+|12| Indiana         | |30| New York       | | 48    | Wyoming         |
+|13| Iowa            | |31| North Carolina | | 49    | Not Used        |
+|14| Kansas          | |32| North Dakota   | | 50    | Alaska          |
+|15| Kentucky        | |33| Ohio           | | 51    | Hawaii          |
+|16| Louisiana       | |34| Oklahoma       | | 66    | Puerto Rico     |
+|17| Maine           | |35| Oregon         | | 67    | Virgin Islands  |
+|18| Maryland        | |36| Pennsylvania   | | 91    | Pacific Islands |
 
 
 
-##### TABLE B 
+
+##### TABLE B  
 
 **Cooperative Network Division Table** NOTE:  The division number for a station may change over time.            HAWAII (STATE 51)\* 
 
@@ -800,460 +765,394 @@ PACIFIC ISLANDS (STATE 91) Division
 
 **CLTL, CLTU – Cloud Type Table** 
 
-C  Cirrus 
+*  C  Cirrus
+*  K  Cumulus
+* ST  Stratus
+* CC  Cirro-cumulus 
+* CS  Cirro-stratus 
+* KS  Cumulo-stratus 
+* KN  Cumulo-nimbus
+*  N  Nimbus
+* NS  Nimbo-stratus
+*  3  clouds
+*  1  clear
+* HZ  haze
+*  F  fog
+* HF  high fog
+* SM  smoky
+* SD  scudd 
 
-K  Cumulus 
+These two-character CLTL/CLTU cloud type codes are stored into the rightmost two characters of the data value portion of the meteorological element.  Within the two characters used, the weather codes are entered left justified and zero filled.  Thus, if cloud type is reported, the data values would appear as 000XX, where XX is the appropriate cloud type code.  Cloud types may include codes for Daily Occurrence of Weather [#Table D](#TABLE-D), or Precipitation Type [#Table E](#TABLE-E). 
 
-ST  Stratus 
+##### TABLE D 
 
-CC  Cirro-cumulus CS  Cirro-stratus KS  Cumulo-stratus KN  Cumulo-nimbus 
+<ins>DYSW/STWX - Daily Occurrence of Weather/State of the Weather Table** 
 
-N  Nimbus 
-
-NS  Nimbo-stratus 
-
-3  clouds 
-
-1  clear 
-
-HZ  haze 
-
-F  fog 
-
-HF  high fog 
-
-SM  smoky 
-
-SD  scudd 
-
-These two-character CLTL/CLTU cloud type codes are stored into the rightmost two characters of the data value portion of the meteorological element.  Within the two characters used, the weather codes are entered left justified and zero filled.  Thus, if cloud type is reported, the data values would appear as 000XX, where XX is the appropriate cloud type code.  Cloud types may include codes for Daily Occurrence of Weather (Table D), or Precipitation Type (Table E). 
-
-**TABLE "D"** 
-
-**DYSW/STWX - Daily Occurrence of Weather/State of the Weather Table** 
-
-1  Clear 
-
-2  Partly cloudy  Clearing, variable 3  Cloudy  Threatening 
-
-4  Rain  Showers/sprinkles 5  Snow 
-
-6  Smoke/haze 
-
-7  Fog 
-
-8  Drizzle (mist)  Misty clouds 
-
-9  Sleet 
-
-10  Glaze 
-
-11  Thunder 
-
-12  Hail 
-
-13  Dust storm 
-
-14  Blowing snow 
-
-15  High wind 
-
-16  Tornado 
-
-17  Fair 
-
-18  Squalls 
-
-19  Frost  Hoar Frost 20  Mixed rain and snow 
-
-21  Dew 
-
-99  Illegible 
+* 1  Clear 
+* 2  Partly cloudy  Clearing, variable 
+* 3  Cloudy  Threatening 
+* 4  Rain  Showers/sprinkles 
+* 5  Snow 
+* 6  Smoke/haze 
+* 7  Fog 
+* 8  Drizzle (mist)  Misty clouds 
+* 9  Sleet 
+* 10  Glaze 
+* 11  Thunder 
+* 12  Hail 
+* 13  Dust storm 
+* 14  Blowing snow 
+* 15  High wind 
+* 16  Tornado 
+* 17  Fair 
+* 18  Squalls 
+* 19  Frost  Hoar Frost 
+* 20  Mixed rain and snow 
+* 21  Dew 
+* 99  Illegible 
 
 These two-character DYSW/STWX element-type codes are stored into the rightmost four characters of the data value portion of the meteorological element.  Within the four characters used, the weather codes are entered left justified and zero filled.  Thus, if one type of weather occurs during a day, the data values would appear as OXXOO, where XX is the appropriate weather code.  If two types of weather occur, the data value will contain OXXYY, where XX is value 1 and YY is value 2.  If more than two types of weather occur on the same day, they will be stored into additional "DLY" records of the element- type code "DYSW" as needed.  For STWX, only one element-type code is allowed for each observation time over the course of the day.  The codes for cloud type (TABLE “C”) may also appear in the DYSW/STWX data, if recorded as such by the observer.  Each element-type code is reported only once for a given day, even if, for example, there were more than one case of thunder reported for the day. 
 
-**TABLE "E"** 
+##### TABLE E 
 
-**PTYP – Precipitation Type Table** 
+<ins>PTYP – Precipitation Type Table*
 
-R  Rain 
-
-T  thunderstorm 
-
-S  Snow 
-
-D  drizzle/mist 
-
-E  Sleet 
-
-G  Glaze 
-
-H  Hail 
-
-I  Ice 
-
-M  mixed - rain and snow 
-
-W  squalls/showers/sprinkles F  Fog 
-
-X  Dew 
-
-Z  Frost 
+* R  Rain 
+* T  thunderstorm 
+* S  Snow 
+* D  drizzle/mist 
+* E  Sleet 
+* G  Glaze 
+* H  Hail 
+* I  Ice 
+* M  mixed - rain and snow 
+* W  squalls/showers/sprinkles F  Fog 
+* X  Dew 
+* Z  Frost 
 
 These one-character PTYP element-type codes are stored into the rightmost character of the data value portion of the meteorological element.  Thus, if precipitation occurs during a day, and the precipitation type is available, the data value would appear as 0000X, where X is the appropriate precipitation type code.  Only one code is recorded for each day for PTYP. 
 
-**TABLE "F"** 
+##### TABLE F 
 
-**TPBG, TPEN - Time Table** 
+<ins>TPBG, TPEN - Time Table 
 
-Sunrise  1300A Sunset  1400P Morning  \_\_\_\_A Afternoon, evening  \_\_\_\_P Missing hour 
-
-Midnight  1200A Noon  1200P DN - during night - means after midnight  \_\_\_\_A Continuing or unknown  \_\_\_\_\_D 
+* Sunrise  1300A 
+* Sunset  1400P 
+* Morning  ____A
+* Afternoon, evening  ____P 
+* Missing hour 
+* Midnight  1200A 
+* Noon  1200P 
+* DN - during night - means after midnight  ____A 
+* Continuing or unknown  _____D 
 
 Times are given in hours and minutes using a 12-hour clock and an AM/PM indicator.  For TPBG/TPEN, if the observer wrote more than one time of beginning/ending into the slot for the day, the keyer digitized the first beginning time, and the last ending time, for each day. 
 
-**TABLE "G"** 
+##### TABLE G 
 
-**Units of Measurement Table** 
+<ins>Units of Measurement Table
 
-Range of values where b = Blank: 
+Range of values where b = Blank:
+* HF  Hundredths of degrees Fahrenheit 
+* bI  Inches 
+* TI  Tenths of an inch 
+* HI  Hundredths of inches 
+* IT  Thousandths of inches of mercury 
+* MH  Miles per hour 
+* bM  Whole miles (right justified) 
+* NA  No units applicable (nondimensional) DG  whole degrees 
+* TN  Scale of 0 to 10 
+* WN  Scale of 0 to 12 
+* PC  Whole percent 
+* TP  Tenths of a percent 
+* TG  Tenths of feet 
+* HG  Hundredths of feet 
+* 
+##### TABLE H 
 
-HF  Hundredths of degrees Fahrenheit 
+<ins>Data Measurement Flag 1
 
-bI  Inches 
-
-TI  Tenths of an inch 
-
-HI  Hundredths of inches 
-
-IT  Thousandths of inches of mercury 
-
-MH  Miles per hour 
-
-bM  Whole miles (right justified) 
-
-NA  No units applicable (nondimensional) DG  whole degrees 
-
-TN  Scale of 0 to 10 
-
-WN  Scale of 0 to 12 
-
-PC  Whole percent 
-
-TP  Tenths of a percent 
-
-TG  Tenths of feet 
-
-HG  Hundredths of feet 
-
-**TABLE "H"** 
-
-**Data Measurement Flag 1** 
-
-A -  Accumulated amount since last measurement. 
-
-M -   For fixed length records only.  
-
-Flag1 is "M" if the data value is missing. In this case, the sign of the meteorological value is assigned "-" and the value of the meteorological element is assigned "99999". 
-
-S -  Included in a subsequent value.   (data value = "00000" OR "99999"). 
-
-T -  Trace (data value = 00000 for a trace). 
-
-Blank -  Flag not needed. 
+* A -  Accumulated amount since last measurement. 
+* M -   For fixed length records only.  
+      Flag1 is "M" if the data value is missing. In this case, the sign of the meteorological value is assigned "-" and the value of the meteorological element is assigned "99999". 
+* S -  Included in a subsequent value.   (data value = "00000" OR "99999"). 
+* T -  Trace (data value = 00000 for a trace). 
+* Blank -  Flag not needed. 
 
 Flag 1 values of "S" and "A" usually occur in pairs (ie. a daily value will have Flag 1 assigned as "S" and the next daily value will have Flag 1 assigned as "A").  For some daily values these flags do not occur in pairs. 
 
-**TABLE "I"**      **Data Quality Flag 2** 
+##### TABLE I      
+<ins>Data Quality Flag 2
 
-2  - Invalid data element (subsequent value replaces original value). 3  - Invalid data element (no replacement value follows). 
+* 2  - Invalid data element (subsequent value replaces original value). 
+* 3  - Invalid data element (no replacement value follows). 
+* 4  - Validity unknown (not checked). 
+* T  - Failed internal consistency check            
 
-4  - Validity unknown (not checked). 
-
-T  - Failed internal consistency check            
-
-7. **Start Date:** 
+### Start Date 
 
 Data prior to 1896 comprise the bulk of the data set with most of the earliest records dating back to 1820.    
 
-8. **Stop Date:** 
+### Stop Date 
 
 For the bulk of the data, the stop date is 1892 or 1896, but some data stop after 1900. 
 
-9. **Parameter**: 
+### Parameter 
 
-Atmospheric Dynamics>Atmospheric Temperature>Daily Maximum Temperature Atmospheric Dynamics>Atmospheric Temperature>Daily Minimum Temperature Atmospheric Dynamics>Atmospheric Temperature>Daily Average Temperature Atmospheric Dynamics>Atmospheric Temperature>Daily Temperature Range Atmospheric Dynamics>Atmospheric Temperature>Observation Time Temperature Atmospheric Dynamics>Precipitation>Daily Precipitation 
+* Atmospheric Dynamics>Atmospheric Temperature>Daily Maximum Temperature 
+* Atmospheric Dynamics>Atmospheric Temperature>Daily Minimum Temperature 
+* Atmospheric Dynamics>Atmospheric Temperature>Daily Average Temperature 
+* Atmospheric Dynamics>Atmospheric Temperature>Daily Temperature Range 
+* Atmospheric Dynamics>Atmospheric Temperature>Observation Time Temperature 
+* Atmospheric Dynamics>Precipitation>Daily Precipitation
+* Atmospheric Dynamics>Precipitation>Daily Snowfall
+* Atmospheric Dynamics>Precipitation>Daily Snow Depth
+* Atmospheric Dynamics>Wind>Wind Movement
+* Atmospheric Dynamics>Wind>Daily Prevailing Wind Direction
+* Atmospheric Dynamics>Cloud>Daily Cloud Amount 
 
-Atmospheric Dynamics>Precipitation>Daily Snowfall 
+### Discipline
 
-Atmospheric Dynamics>Precipitation>Daily Snow Depth 
-
-Atmospheric Dynamics>Wind>Wind Movement 
-
-Atmospheric Dynamics>Wind>Daily Prevailing Wind Direction 
-
-Atmospheric Dynamics>Cloud>Daily Cloud Amount 
-
-10. **Discipline:** 
-
-Earth Science>Atmospheric>Meteorology/Climatology 
+<ins>Earth Science>Atmospheric>Meteorology/Climatology 
 
 Daily Precipitation, Daily Snowfall, Daily Snow Depth, Daily Maximum Temperature, Daily Minimum Temperature, Observation Time Temperature, Wind Movement, Weather 
 
-Earth Science>Land>Hydrology 
+<ins>Earth Science>Land>Hydrology 
 
 Evaporation, Daily Snowfall, Daily Snow Depth, Daily Precipitation 
 
-Earth Science>Land>Agriculture Daily Precipitation, Evaporation 
+<ins>Earth Science>Land>Agriculture 
 
-11. **Coverage:** 
+Daily Precipitation, Evaporation 
 
-Southernmost Latitude            22N Northernmost Latitude            65N Westernmost Longitude           178W Easternmost Longitude            68W 
+### Coverage
 
-12. **Location**: 
+* Southernmost Latitude            22N 
+* Northernmost Latitude            65N 
+* Westernmost Longitude           178W 
+* Easternmost Longitude            68W 
 
-Areal Coverage 
+### Location
+
+<ins>Areal Coverage 
 
 North America>Continental USA 
 
-13. **Keywords:** 
+### Keywords
 
 Temperature 
 
-Maximum Temperature (24 HR) Minimum Temperature (24 HR) Mean Temperature  (24 HR) Temperature at Observation Time Precipitation 
+* Maximum Temperature (24 HR) 
+* Minimum Temperature (24 HR) 
+* Mean Temperature  (24 HR) 
+* Temperature at Observation Time 
+* Precipitation 
+* Snow 
+* Snow on Ground 
+* Evaporation 
+* Sky Condition 
+* Weather 
+* Drizzle 
+* Ice Pellets 
+* Glaze 
+* Thunder 
+* Hail 
+* Dust 
+* Sand Storm 
+* Blowing Snow 
+* Winds 
+* Tornado 
+* Rain 
+* Smoke 
+* Fog 
+* TD-3206 
+* 3206 
 
-Snow 
-
-Snow on Ground 
-
-Evaporation 
-
-Sky Condition 
-
-Weather 
-
-Drizzle 
-
-Ice Pellets 
-
-Glaze 
-
-Thunder 
-
-Hail 
-
-Dust 
-
-Sand Storm 
-
-Blowing Snow 
-
-Winds 
-
-Tornado 
-
-Rain 
-
-Smoke 
-
-Fog 
-
-TD-3206 
-
-3206 
-
-14. **Storage Medium**: HDSS 
-14. **File Mode:** 
+### Storage Medium
+HDSS
+### File Mode 
 
 ASCII 
 
-16. **How to Order Data**: 
+### How to Order Data
 
 These data are available for purchase from the National Climatic Data Center, Climate Services Branch, Federal Building, 151 Patton Avenue, Room 120, Asheville, NC., 28801-5001, phone number (828)-271-4800, e-mail ncdc.orders@noaa.gov 
 
-17. **Historical and Current Data Sources**: 
+### Historical and Current Data Sources
 
-Cooperative Observations 
+* Cooperative Observations 
+* Principal Climatological Stations 
+* Summary of the Day Observations 
+* Punched Card Deck 345 
+* Punched Card Deck 486 
+* State Universities 
+* Evaporation Observations 
+* Digital Files 
+* Daily Observations (manuscripts and publications) 
+* Tape Deck 9639 
+* Tape Deck 9727 
+* Historical Files 
+* MAPSO Diskettes                      
 
-Principal Climatological Stations 
-
-Summary of the Day Observations 
-
-Punched Card Deck 345 
-
-Punched Card Deck 486 
-
-State Universities 
-
-Evaporation Observations 
-
-Digital Files 
-
-Daily Observations (manuscripts and publications) Tape Deck 9639 
-
-Tape Deck 9727 
-
-Historical Files 
-
-MAPSO Diskettes                      
-
-18. **Algorithms**: 
-
+### Algorithms 
 No information available at this time.               
 
-19. **Responsibility for** **Algorithms**: 
+### Responsibility for Algorithms 
 
 No information available at this time.                
 
-20. **Project**: 
+### Project
 
 National Weather Service (NWS) Cooperative Program 
 
-21. **Archiving** **Data Center:** 
+### Archiving Data Center
 
 National Climatic Data Center,  NOAA/NESDIS/NCDC 
-
 151 Patton Avenue 
-
 Asheville, NC  28801-5001 Phone (828) 271-4800 
 
-22. **Originating** **Data Center**: 
+### Originating Data Center 
+
+National Climatic Data Center NOAA/NESDIS/NCDC
+151 Patton Avenue 
+Asheville, NC  28801-5001 Phone (828) 271-4800 
+
+### Technical Contact 
 
 National Climatic Data Center NOAA/NESDIS/NCDC 
-
 151 Patton Avenue 
-
 Asheville, NC  28801-5001 Phone (828) 271-4800 
 
-23. **Technical Contact**: 
+### Sensor Name and Operating Principles:
+No information available at this time.
 
-National Climatic Data Center NOAA/NESDIS/NCDC 
-
-151 Patton Avenue 
-
-Asheville, NC  28801-5001 Phone (828) 271-4800 
-
-25. **Sensor Name and Operating Principles:** No information available at this time. 
-25. **Sensor Siting**: 
+### Sensor Siting
 
 No information available at this time. 
 
-27. **Sensor Accuracy and Calibration**: 
+### Sensor Accuracy and Calibration
 
 No information available at this time. 
 
-28. **Sensor Sampling Characteristics**: 
+### Sensor Sampling Characteristics 
 
 No information available at this time. 
 
-29. **Data Capture Method:** 
+### Data Capture Method
 
 No information available at this time. 
 
-30. **Station Location Accuracy:** 
+### Station Location Accuracy
 
 Station History Locations are digitized as recorded on the original forms.  In most cases, the latitude and longitude were recorded to the nearest minute; in some cases, to the nearest second.  The accuracy of the instrumentation and process of measuring the locations is unknown. 
 
-31. **Station Observation Schedule:** 
+### Station Observation Schedule
 
 Since the observations preserved in this digital data set are from the beginnings of instrumented weather observations and observing networks, the station observation schedule is non-standard, especially for the records for the early 1800’s.  Observations in this data set include daily observations recorded in either the morning, evening, or at midnight, as well as observations at one or more points in time throughout the day.   
 
-32. **Station Data Time Averaging:** 
+### Station Data Time Averaging
 
 The daily mean temperatures keyed for this data set are those as recorded on the original forms by the observers.  In general, when daily maximum and minimum temperatures were available, the daily mean was calculated by the observer or other editor as the simple average of the two.  When three point measurements of the temperature (TAHR) were recorded over the course of the 24-hour period, the mean was generally calculated in one of two ways.  One was to take the simple average of the three measurements; the other, to add in the evening temperature twice and divide by four.  Which calculation method was used by the observer or other editor to calculate the daily mean is generally not available.  Some information may be available in the accompanying metadata. 
 
-33. **Spatial Sampling Using** **Station Grouping**: Not Applicable. 
-33. **Network Participation**: 
+### Spatial Sampling Using Station Grouping
+ Not Applicable. 
+### Network Participation
 
 This data set is comprised of stations from the 1800’s from a variety of networks, as well as private journals and other documents.  The networks include military and civil; some observers were paid, while others were volunteers.  The funding and responsibility for maintenance of the instruments varied by network. 
 
-35. **Geographic Criteria for Selecting** **Stations:** Not Applicable. 
-35. **Geographical Distribution:**   
+### Geographic Criteria for Selecting Stations
+Not Applicable. 
+### Geographical Distribution  
 
 The distribution of stations varies over time and space as a result of the expansion of observers across the country and the evolution of observer networks.  There are approximately 5,000 stations, as defined by location name, in the entire historical archive for the 1800’s.  A subset of these were selected for digitization based on length and continuity of record, location, and other factors. 
 
-37. **Elevation Distribution**:  
+### Elevation Distribution
 
 Elevations for fixed surface locations for the data set are mostly below 1,000 meters above sea level. 
 
-38. **Instrument Problems**: 
+### Instrument Problems
 
 No information available at this time. 
 
-39. **Missing Data Periods:** 
+### Missing Data Periods 
 
 No information available at this time. 
 
-40. **Sampling Biases:**   
+### Sampling Biases
 
 No information available at this time. 
 
-41. **Error Detection and Correction:** 
+### Error Detection and Correction
 
 The historical data were keyed from microfilm copies of original observation forms. A quality control process developed specifically for this data set performs internal consistency, climatological limit, and serial checks on both daily values and monthly values derived from the daily values.  This process includes manual verification of flagged data.  In general, quality control flags are not included in the digitized data set.  The general purpose of the quality control process is to assure that the digitized data accurately reflect the observations as recorded on the form.  In some cases, the assignment of element code to the data is adjusted to match the data rather than the column headings on the forms.  For more information about the quality control process, please refer to Appendix A, “Digitization of Historical Daily Data from the 1800’s”.  The user should investigate the accuracy and homogeneity of the data for each specific application. 
 
-42. **Missing Value Estimates:** 
+### Missing Value Estimates
 
 No information available at this time. 
 
-43. **Quality Control Responsibility:** 
+### Quality Control Responsibility
 
 Responsibility for data quality rested with the individual observer, as well as the historical network managers. 
 
-44. **Known Uncorrected Problems**: 
+### Known Uncorrected Problems
 
 For some stations for some time periods, the date of the maximum temperature may be wrong by one day.  The problem arises because the observer or network manager may have recorded the maximum temperature on a calendar date rather than on the date of the end of the 24-hour observation.  This problem sometimes causes the maximum temperature for a day to be less than the minimum temperature. For more information about uncorrected problems, please refer to Appendix A. 
 
-45. **Confidence Factors:** 
+### Confidence Factors
 
 Because the data were keyed from microfilm, because the operational observation and quality assurance procedures changed markedly over the historical period of the data set, and because no quality assurance of the data was performed for this project other than those noted in Appendix A, the user should be wary of all the data in this data set.  
 
-46. **History of Data Usage:** 
+### History of Data Usage
 
 This digital data set is new and does not yet have a history of use. 
 
-47. **Quality Statement:** 
+### Quality Statement
 
 The historical nature of the data set, as well as limited resources (monetary and personnel) for applying quality control and assurance, contribute toward less than optimum conditions in ensuring the integrity of the data. 
 
-48. **Revision Date**: 
+### Revision Date
 
 None. 
 
-49. **Science Review Date:**   None. 
-49. **Future Review Date:**    
+### Science Review Date
+None. 
+### Future Review Date    
 
 Not applicable at this time.      
 
-51. **Source Data Sets**: 
+### Source Data Sets
 
 This data set is currently compiled from microfilm copies of manuscript forms from the National Archives.  
 
-52. **Essential Companion** **Data Sets**: TD-3200. 
-52. **Derived Data Sets:** 
+### Essential Companion Data Sets
+TD-3200. 
+### Derived Data Sets
 
 None. 
 
-54. **Larger Collections:** 
+### Larger Collections
 
 No information available at this time. 
 
-55. **Similar** **Data Sets:**                                         
+### Similar Data Sets
 
 DS-3200  Coop Summary of the Day 
 
-DS-3210  Summary of Day-First Order                                           DS-3220  Coop Summary of Month                                                DS-3240  Hourly Precipitation                                                 DS-3260  15-Minute Precipitation         
+* DS-3210  Summary of Day-First Order                                           
+* DS-3220  Coop Summary of Month                                                
+* DS-3240  Hourly Precipitation                                                 
+* DS-3260  15-Minute Precipitation
+* DS-3280  US Global Surface Airways Hourly Observations 
 
-DS-3280  US Global Surface Airways Hourly Observations 
-
-56. **References:** See Appendix A. 
-56. **Summary:** 
+### References
+See [Appendix A](#Appendix-A). 
+### Summary  
 
 This data set is a compilation of digitized daily observations for the 1800’s. The period of record and number of stations varies among the states.  The records generally date back to the late 1820’s.  These data have been subjected to internal consistency checks, compared against climatological limits, and checked serially. 
 
-**Glossary** 
+### Glossary
 
-**Access Method for Archived Data -- How a digital data set can be accessed in its archived condition.** 
+**Access Method for Archived Data** -- How a digital data set can be accessed in its archived condition.** 
 
 **Access Method for Supplied Data** -- How the user can access data in its most commonly supplied form. 
 
@@ -1371,9 +1270,9 @@ Reference -- Any important bibliographic reference pertaining to the data set or
 
 **Technical Contact** -- The person who can be contacted to obtain and provide information about the data. 
 
-**Appendix A** 
+## Appendix A
 
-**Quality Control of Daily Data from the 1800’s** 
+### Quality Control of Daily Data from the 1800’s
 
 The quality control tests developed for this data set are listed in the following table.  The quality control tests are applied in order, with the outliers from each test verified before continuing to the next test.  The outliers generated by each test are appended to the outlier file for each station.  The verification process produces two files, one listing the verification with explanation for each outlier, the other listing necessary corrections to be applied to the data.  After the outliers for one test are verified, the corrections are all applied in order to the data for the station, and then the next test is run. 
 
